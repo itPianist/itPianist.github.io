@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on IT的不參不肆</title>
-    <link>https://ITpianist.github.io/post/</link>
+    <link>https://itpianist.github.io/post/</link>
     <description>Recent content in Posts on IT的不參不肆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <lastBuildDate>Tue, 11 Sep 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://ITpianist.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://itpianist.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>911中毒事件part1</title>
-      <link>https://ITpianist.github.io/post/post1/</link>
+      <link>https://itpianist.github.io/post/post1/</link>
       <pubDate>Tue, 11 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://ITpianist.github.io/post/post1/</guid>
+      <guid>https://itpianist.github.io/post/post1/</guid>
       <description>晚班同仁接收到其他部門的同事的反應
 發現公司的file server 一個全公司部門交換業務檔案的網路磁碟槽有異狀，但檔案還是可開啟，可使用，部分檔案開啟有異狀
 當下遠端連過去看file server，發現檔案副檔名全部被改成.exe

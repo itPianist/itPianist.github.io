@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on IT的不參不肆</title>
-    <link>https://ITpianist.github.io/categories/</link>
+    <link>https://itpianist.github.io/categories/</link>
     <description>Recent content in Categories on IT的不參不肆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <lastBuildDate>Tue, 11 Sep 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://ITpianist.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://itpianist.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>paloalto</title>
-      <link>https://ITpianist.github.io/categories/paloalto/</link>
+      <link>https://itpianist.github.io/categories/paloalto/</link>
       <pubDate>Tue, 11 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://ITpianist.github.io/categories/paloalto/</guid>
+      <guid>https://itpianist.github.io/categories/paloalto/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Security</title>
-      <link>https://ITpianist.github.io/categories/security/</link>
+      <link>https://itpianist.github.io/categories/security/</link>
       <pubDate>Tue, 11 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://ITpianist.github.io/categories/security/</guid>
+      <guid>https://itpianist.github.io/categories/security/</guid>
       <description></description>
     </item>
     
     <item>
       <title>virus</title>
-      <link>https://ITpianist.github.io/categories/virus/</link>
+      <link>https://itpianist.github.io/categories/virus/</link>
       <pubDate>Tue, 11 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://ITpianist.github.io/categories/virus/</guid>
+      <guid>https://itpianist.github.io/categories/virus/</guid>
       <description></description>
     </item>
     

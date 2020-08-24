@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>IT的不參不肆</title>
-    <link>https://ITpianist.github.io/</link>
+    <link>https://itpianist.github.io/</link>
     <description>Recent content on IT的不參不肆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <lastBuildDate>Tue, 11 Sep 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://ITpianist.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://itpianist.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title></title>
-      <link>https://ITpianist.github.io/archives/</link>
+      <link>https://itpianist.github.io/archives/</link>
       <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://ITpianist.github.io/archives/</guid>
+      <guid>https://itpianist.github.io/archives/</guid>
       <description></description>
     </item>
     
     <item>
       <title>911中毒事件part1</title>
-      <link>https://ITpianist.github.io/post/post1/</link>
+      <link>https://itpianist.github.io/post/post1/</link>
       <pubDate>Tue, 11 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://ITpianist.github.io/post/post1/</guid>
+      <guid>https://itpianist.github.io/post/post1/</guid>
       <description>晚班同仁接收到其他部門的同事的反應
 發現公司的file server 一個全公司部門交換業務檔案的網路磁碟槽有異狀，但檔案還是可開啟，可使用，部分檔案開啟有異狀
 當下遠端連過去看file server，發現檔案副檔名全部被改成.exe
@@ -39,10 +39,10 @@
     
     <item>
       <title>關於我</title>
-      <link>https://ITpianist.github.io/about/</link>
+      <link>https://itpianist.github.io/about/</link>
       <pubDate>Fri, 16 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://ITpianist.github.io/about/</guid>
+      <guid>https://itpianist.github.io/about/</guid>
       <description>資海無涯，回頭是岸，驀然回首，卻看不到岸
 經歷：寫寫小程式，規劃網路架構，從事POS機到醫療業的資訊軟體最後落腳到IT，擅長資訊安全、無線網路佈建，開始埋頭研究linux</description>
     </item>
