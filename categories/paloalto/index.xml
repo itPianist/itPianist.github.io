@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>paloalto on IT的不參不肆</title>
+    <link>https://ITpianist.github.io/categories/paloalto/</link>
+    <description>Recent content in paloalto on IT的不參不肆</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Tue, 11 Sep 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://ITpianist.github.io/categories/paloalto/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>911中毒事件part1</title>
+      <link>https://ITpianist.github.io/post/post1/</link>
+      <pubDate>Tue, 11 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://ITpianist.github.io/post/post1/</guid>
+      <description>晚班同仁接收到其他部門的同事的反應
+發現公司的file server 一個全公司部門交換業務檔案的網路磁碟槽有異狀，但檔案還是可開啟，可使用，部分檔案開啟有異狀
+當下遠端連過去看file server，發現檔案副檔名全部被改成.exe
+一般使用者乍看之下沒問題，點擊之後會啟動bat，把你電腦的檔案變成exe，也將修改時間變成2010-1-26，將原本的檔案及資料夾隱藏
+讓使用者去點擊.exe的檔案
+上圖關閉隱藏副檔名發現的
+趕回公司處理，開啟防火牆看連線，發現三個部門各一台電腦，不斷向外連C&amp;amp;C伺服器，只是向外連被paloalto給deny
+鎖定受害部門後，請受害單位同仁關機並拔除網路線
+機房節點拔除線路，忙著忙著也到凌晨兩點了，早上是一場硬戰</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ZH-TW"><head>
+    <title>IT的不參不肆</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="theme-color" content="#000084" />
+    <link rel="icon" href="https://ITpianist.github.io/favicon.ico">
+    <link rel="canonical" href="https://ITpianist.github.io">
+    
+    
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"></button>
+            <a class="brand" href="https://ITpianist.github.io">IT的不參不肆</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    
+                    
+                        
+                            <li>
+                                <a href="/about/">
+                                    
+                                    <span>關於我</span>
+                                </a>
+                            </li>
+                        
+                    
+                        
+                            <li>
+                                <a href="/post/">
+                                    
+                                    <span>所有文章</span>
+                                </a>
+                            </li>
+                        
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav><div id="content" class="container">
+
+<div class="row-fluid navmargin">
+    <div class="page-header">
+        <h1>911中毒事件part1 - Tue, Sep 11, 2018</h1>
+    </div>
+    <p class="lead">file server由晚班同仁回報被加密，導致全公司網路磁碟槽檔案副檔名都被改成.exe</p>
+    <p>晚班同仁接收到其他部門的同事的反應</p>
+<p>發現公司的file server 一個全公司部門交換業務檔案的網路磁碟槽有異狀，但檔案還是可開啟，可使用，部分檔案開啟有異狀</p>
+<p>當下遠端連過去看file server，發現檔案副檔名全部被改成.exe</p>
+<p>一般使用者乍看之下沒問題，點擊之後會啟動bat，把你電腦的檔案變成exe，也將修改時間變成2010-1-26，將原本的檔案及資料夾隱藏</p>
+<p>讓使用者去點擊.exe的檔案</p>
+<p><img src="/img/post1.png" alt=""></p>
+<p><img src="/img/post2.png" alt=""></p>
+<p>上圖關閉隱藏副檔名發現的</p>
+<p>趕回公司處理，開啟防火牆看連線，發現三個部門各一台電腦，不斷向外連C&amp;C伺服器，只是向外連被paloalto給deny</p>
+<p><img src="/img/post3.jpg" alt=""></p>
+<p>鎖定受害部門後，請受害單位同仁關機並拔除網路線</p>
+<p>機房節點拔除線路，忙著忙著也到凌晨兩點了，早上是一場硬戰</p>
+
+    <h4><a href="https://ITpianist.github.io"></a></h4>
+</div>
+
+
+        </div><footer class="container">
+    <hr class="soften">
+    <p>
+
+    <a href="itPianist.github.io">跌跌撞撞且坎坷MIS路</a> | 
+
+&copy; 
+
+    itPianist
+
+<span id="thisyear">2020</span>
+
+
+        |  <a href="//gohugo.io" target="_blank">Hugo</a>
+</p>
+    <p class="text-center">
+        
+        
+        
+        
+        
+    </p>
+</footer>
+
+</body><link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="/css/bootstrap-responsive.css">
+<link rel="stylesheet" href="/css/style.css">
+
+<script src="/js/jquery.js"></script>
+<script src="/js/bootstrap-386.js"></script>
+<script src="/js/bootstrap-transition.js"></script>
+<script src="/js/bootstrap-alert.js"></script>
+<script src="/js/bootstrap-modal.js"></script>
+<script src="/js/bootstrap-dropdown.js"></script>
+<script src="/js/bootstrap-scrollspy.js"></script>
+<script src="/js/bootstrap-tab.js"></script>
+<script src="/js/bootstrap-tooltip.js"></script>
+<script src="/js/bootstrap-popover.js"></script>
+<script src="/js/bootstrap-button.js"></script>
+<script src="/js/bootstrap-collapse.js"></script>
+<script src="/js/bootstrap-carousel.js"></script>
+<script src="/js/bootstrap-typeahead.js"></script>
+<script src="/js/bootstrap-affix.js"></script>
+<script>
+    _386 = { 
+        fastLoad: false ,
+        onePass: false , 
+        speedFactor: 1 
+    };
+
+    
+    function ThisYear() {
+        document.getElementById('thisyear').innerHTML = new Date().getFullYear();
+    };
+</script></html>
