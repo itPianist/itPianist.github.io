@@ -38,5 +38,32 @@
       <description></description>
     </item>
     
+    <item>
+      <title>fastcopy</title>
+      <link>https://itpianist.github.io/categories/fastcopy/</link>
+      <pubDate>Mon, 12 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://itpianist.github.io/categories/fastcopy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>robocopy</title>
+      <link>https://itpianist.github.io/categories/robocopy/</link>
+      <pubDate>Mon, 12 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://itpianist.github.io/categories/robocopy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tunkey</title>
+      <link>https://itpianist.github.io/categories/tunkey/</link>
+      <pubDate>Mon, 12 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://itpianist.github.io/categories/tunkey/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

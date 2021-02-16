@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ZH-TW"><head>
+    <title>IT的不參不肆</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="theme-color" content="#000084" />
+    <link rel="icon" href="https://itpianist.github.io/favicon.ico">
+    <link rel="canonical" href="https://itpianist.github.io">
+    
+    
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"></button>
+            <a class="brand" href="https://itpianist.github.io">IT的不參不肆</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    
+                    
+                        
+                            <li>
+                                <a href="/about/">
+                                    
+                                    <span>關於我</span>
+                                </a>
+                            </li>
+                        
+                    
+                        
+                            <li>
+                                <a href="/post/">
+                                    
+                                    <span>所有文章</span>
+                                </a>
+                            </li>
+                        
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav><div id="content" class="container">
+
+<div class="row-fluid navmargin">
+    <div class="page-header">
+        <h1>電子發票上傳失敗 Part1 - Mon, Mar 12, 2018</h1>
+    </div>
+    <p class="lead">前情提要：每日產出的電子發票拋轉到Tunkey server上，都到幾千張就停止拋轉了</p>
+    <p><img src="/img/Tunkey.jpg" alt=""></p>
+<p>由於每天凌晨兩點會排程Pos server 上的電子發票拋轉到Tunkey server上，由Tunkey 將已開立、作廢等發票上傳到財政部einvoice上，往常拋轉都沒有大問題，這幾天一直失敗，問合作廠商也是多開幾個排程讓電子發票在拋，少則缺幾百張，多者直接少一半，用人力去轉也不是辦法，於是利用robocopy這個指令來接替合作廠商的程式。</p>
+<p>首先先掛載Pos server 上存的電子發票資料檔</p>
+<p><code>net use Z:\\\192.168.1.1\pos\EINVOICE_XML\2018 /user:帳號　密碼</code></p>
+<p>當然也可以選擇不寫這段，直接掛載起來也可以，只是Tunkey重開機的時候要記得掛起來</p>
+<p>否則底下程式碼全部都會沒作用</p>
+<p><code>robocopy Z:\EINVOICE_XML\2018\ C:\einvt_xml *.xml /xo /s /lev:3 /maxage:1</code></p>
+<p>這行指令會把pos主機的最新產出的資料夾複製到Tunkey主機上的C:\einvt_xml上</p>
+<p>這指令注意的一點就是EINVOICE_XML\2018資料夾只有當天的發票資料</p>
+<p>如果有其他天的發票資料，那麼就會全部複製過去，如果有存放其他天資料，robocopy就要加時間函數</p>
+<p><code>for /r C:\einvt_xml\ %%f in (*.xml) do move &quot;%%f&quot; C:\test</code></p>
+<p>會加這行因為複製過來的檔案，會依循pos機上的發票的分類資料夾去複製</p>
+<p>如果沒做這段，robocopy會跟著資料夾一起複製，會導致einvoice軟體上傳失敗</p>
+<p>功能就是把所有C0401、C0501、C0601、D00301、D0401、D0501、C0701裡頭的發票檔</p>
+<p>全部整丟到C:\test上，方便後續用robocopy做分類move</p>
+<p><code>robocopy C:\test\ C:\EINVTurnkey\DATA\UpCast\B2CSTORAGE\C0401\SRC C0401*.XML/xo /maxage:1 /LOG+:C:\test\backup.txt</code></p>
+<p>test資料夾裏頭的*.xml發票檔，依照已開立，已作廢等丟到EINVTurnkey的C0401的UpCast上</p>
+<p><strong>/LOG+:C:\test\backup.txt</strong>　這段是做完之後將log留下來，以便後續找bug</p>
+<p>上段只要把C0401的數字改成其他財政部規定的值就可以了</p>
+<p><code>robocopy C:\test\ C:\EINVTurnkey\DATA\UpCast\B2CSTORAGE\C0501\SRC C0501*.XML/xo /maxage:1 /LOG+:C:\test\backup.txt</code></p>
+<p>最後把test資料夾裡的.xml刪除就可以</p>
+<p><code>del /S C:\test\*.xml </code></p>
+<p>不用這個指令也可以，robocopy指令加一行/MOVE就可以了</p>
+<p>使用幾天都沒有異常，但一旦發票數量達上千張的時候，robocopy指令就出現bug了</p>
+<hr>
+<p>已啟動 :</p>
+<p>來源 : C:\test\  目的地 : C:\EINVTurnkey\DATA\UpCast\B2CSTORAGE\C0701\SRC\</p>
+<p>檔案 : C0701*.XML     選項 : /COPY:DAT /XO /MAXAGE:1 /R:1000000 /W:30</p>
+<hr>
+<p>1    C:\test\            新檔案                  1331        C0401-20180109023313-00003462.xml0% 100%</p>
+<hr>
+<p>總計       已複製        略過        不符        失 敗        額外      目錄 :         1         0         1         0         0         0      檔案 :         1         1         0         0         0         0     位元組 :     1.2 k     1.2 k         0         0         0         0      時間 :   0:00:00   0:00:00                       0:00:00   0:00:00</p>
+<hr>
+<p>這指令會將C0401*.XML的檔案丟到C0701資料上，明明指令都下了C0401的發票檔只能丟C0401上</p>
+<p>查詢一下國外有沒有相關BUG案例，可惜的是沒有查到</p>
+<p>於是在下幾行檢查指令，結果還是一樣，於是只能改另外一種作法</p>
+<h3 id="使用fastcopy來做">使用Fastcopy來做</h3>
+
+    <h4><a href="https://itpianist.github.io"></a></h4>
+</div>
+
+
+        </div><footer class="container">
+    <hr class="soften">
+    <p>
+
+    <a href="itPianist.github.io">跌跌撞撞且坎坷MIS路</a> | 
+
+&copy; 
+
+    itPianist
+
+<span id="thisyear">2020</span>
+
+
+        |  <a href="//gohugo.io" target="_blank">Hugo</a>
+</p>
+    <p class="text-center">
+        
+        
+        
+        
+        
+    </p>
+</footer>
+
+</body><link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="/css/bootstrap-responsive.css">
+<link rel="stylesheet" href="/css/style.css">
+
+<script src="/js/jquery.js"></script>
+<script src="/js/bootstrap-386.js"></script>
+<script src="/js/bootstrap-transition.js"></script>
+<script src="/js/bootstrap-alert.js"></script>
+<script src="/js/bootstrap-modal.js"></script>
+<script src="/js/bootstrap-dropdown.js"></script>
+<script src="/js/bootstrap-scrollspy.js"></script>
+<script src="/js/bootstrap-tab.js"></script>
+<script src="/js/bootstrap-tooltip.js"></script>
+<script src="/js/bootstrap-popover.js"></script>
+<script src="/js/bootstrap-button.js"></script>
+<script src="/js/bootstrap-collapse.js"></script>
+<script src="/js/bootstrap-carousel.js"></script>
+<script src="/js/bootstrap-typeahead.js"></script>
+<script src="/js/bootstrap-affix.js"></script>
+<script>
+    _386 = { 
+        fastLoad: false ,
+        onePass: false , 
+        speedFactor: 1 
+    };
+
+    
+    function ThisYear() {
+        document.getElementById('thisyear').innerHTML = new Date().getFullYear();
+    };
+</script></html>

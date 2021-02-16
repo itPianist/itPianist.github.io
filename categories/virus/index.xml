@@ -28,5 +28,53 @@
 機房節點拔除線路，忙著忙著也到凌晨兩點了，早上是一場硬戰</description>
     </item>
     
+    <item>
+      <title>911中毒事件part2</title>
+      <link>https://itpianist.github.io/post/post2/</link>
+      <pubDate>Tue, 11 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://itpianist.github.io/post/post2/</guid>
+      <description>由於大多數電腦為十年以上的老電腦，加上sohpos已經不更新了
+利用幾家防毒軟體所出的PE系統，燒錄成光碟或隨身碟
+Kaspersky Rescue Disk
+AVG Rescue
+Trend Micro Rescue
+在各個單位電腦關機掃描
+掃到了三單位各有一台中毒
+以上掃出來的畫面
+花費了一整天將各單位的電腦排除之後
+目前開放windows7的電腦先行作業
+windows xp的電腦停止使用
+先恢復大部分電腦，事情大概告一段落
+接下來就是必須檢討該資安事件了。</description>
+    </item>
+    
+    <item>
+      <title>911中毒事件part3</title>
+      <link>https://itpianist.github.io/post/post3/</link>
+      <pubDate>Tue, 11 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://itpianist.github.io/post/post3/</guid>
+      <description>上圖為ocs盤點全公司OS數量，XP數量還是佔多數
+上半年不斷協調各單位適應windows7以及排除erp及財會軟體在windows7上的安全性要求，不然圖上數量windows7的數量會更少
+由於財會軟體及erp系統，導致前人購入電腦windows 7之後都會要求廠商降為windows xp，但windows xp在2014就停止更新了
+而上半年呈報告給上層，說明xp已經不堪使用，再來防毒軟體在第二季停止更新xp作業系統，形同資安缺口
+因為這次事件之前本人努力將各單位能夠升級到windows7的電腦
+幾乎都升級上去，剩下的都是老舊無法升級的電腦
+（早期購入windows7都降版成windows xp）
+sophos central 已經跳出不支援xp，除非購買擴充支援
+依我方的的U數，廠商報價是一台汽車價格
+目前處理方法順序如下
+  將營運線路與office節點做斷線 無論有無做vlan，建議switch實體拔除
+  準備大量的usb隨身碟或光碟片 這點是為了準備PE掃毒軟體，在各單位部門電腦上實施掃毒
+  將file server上的資料全部清點， 先要將重要的生產環境與辦公室環境連線拔除
+以免擴散到生產環境，也因為file server過於老舊
+(server 2003)
+而各單位交換檔案也會透過這台file server
+才會蔓延的如此快，因為此事件是發生在晚間八點多
+各後勤單位都已經下班，只剩營業單位，受害單位及範圍比較小
+  </description>
+    </item>
+    
   </channel>
 </rss>

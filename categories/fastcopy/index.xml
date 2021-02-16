@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>fastcopy on IT的不參不肆</title>
+    <link>https://itpianist.github.io/categories/fastcopy/</link>
+    <description>Recent content in fastcopy on IT的不參不肆</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Mon, 12 Mar 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://itpianist.github.io/categories/fastcopy/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>電子發票上傳失敗 Part2</title>
+      <link>https://itpianist.github.io/post/post5/</link>
+      <pubDate>Mon, 12 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://itpianist.github.io/post/post5/</guid>
+      <description>利用fastcopy軟體來copy發票檔，指令大同小異，一樣也是從Tunkey主機上做
+依舊掛載pos server主機上存放發票資料檔
+定義為Z槽
+net use Z:\\\192.168.1.1\pos\EINVOICE_XML\ /user:帳號　密碼
+只是我把2018資料夾給拿掉，fastcopy加一行時間函數，跨年就不用去改掛載資料夾
+C:\test\FastCopy\FastCopy.exe /cmd=diff /to_date=&amp;quot;+12h&amp;quot; /auto_close /estimate /logfile=&amp;quot;C:\test\fastcopy.txt&amp;quot; /include=&amp;quot;*.xml&amp;quot; &amp;quot;Z:\&amp;quot; /to=&amp;quot;C:\einvt_xml&amp;quot;
+注意一點的是Fastcopy的執行檔要指定，如果指定錯誤位置，fastcopy會沒作用
+  /cmd=diff
+diff這指令是複製指令，也可以用move指令，因為要留一份在pos主機上
+/cmd= (noexist_only | diff | update | force_copy | sync | move | delete)
+  /to_date=&amp;quot;+12h&amp;rdquo;
+這個是時間函數，指令最新的時間，+12h是12小時內產生的檔案會複製，超過12h外產生的資料不複製，也就是這條指令，掛載Einvoice就不會每年改一次掛載資料夾
+  /auto_close
+複製完之後自動關閉
+  /estimate
+複製copy預估完成時間，這條可加可不加
+  /logfile=&amp;quot;C:\test\fastcopy.txt&amp;rdquo;
+複製完成之後產出log，會這樣做的原因也是避免像robocopy有bug的問題
+  /include=&amp;rdquo;*.xml&amp;rdquo;
+只有xml檔案會複製，其他排除
+  &amp;ldquo;Z:&amp;quot; /to=&amp;quot;C:\einvt_xml&amp;rdquo;
+將發票資料檔複製到C:\einvt_xml上
+  @for /r C:\einvt_xml\ %%f in (*.</description>
+    </item>
+    
+  </channel>
+</rss>

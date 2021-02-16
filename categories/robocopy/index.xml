@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>robocopy on IT的不參不肆</title>
+    <link>https://itpianist.github.io/categories/robocopy/</link>
+    <description>Recent content in robocopy on IT的不參不肆</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Mon, 12 Mar 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://itpianist.github.io/categories/robocopy/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>電子發票上傳失敗 Part1</title>
+      <link>https://itpianist.github.io/post/post4/</link>
+      <pubDate>Mon, 12 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://itpianist.github.io/post/post4/</guid>
+      <description>由於每天凌晨兩點會排程Pos server 上的電子發票拋轉到Tunkey server上，由Tunkey 將已開立、作廢等發票上傳到財政部einvoice上，往常拋轉都沒有大問題，這幾天一直失敗，問合作廠商也是多開幾個排程讓電子發票在拋，少則缺幾百張，多者直接少一半，用人力去轉也不是辦法，於是利用robocopy這個指令來接替合作廠商的程式。
+首先先掛載Pos server 上存的電子發票資料檔
+net use Z:\\\192.168.1.1\pos\EINVOICE_XML\2018 /user:帳號　密碼
+當然也可以選擇不寫這段，直接掛載起來也可以，只是Tunkey重開機的時候要記得掛起來
+否則底下程式碼全部都會沒作用
+robocopy Z:\EINVOICE_XML\2018\ C:\einvt_xml *.xml /xo /s /lev:3 /maxage:1
+這行指令會把pos主機的最新產出的資料夾複製到Tunkey主機上的C:\einvt_xml上
+這指令注意的一點就是EINVOICE_XML\2018資料夾只有當天的發票資料
+如果有其他天的發票資料，那麼就會全部複製過去，如果有存放其他天資料，robocopy就要加時間函數
+for /r C:\einvt_xml\ %%f in (*.xml) do move &amp;quot;%%f&amp;quot; C:\test
+會加這行因為複製過來的檔案，會依循pos機上的發票的分類資料夾去複製
+如果沒做這段，robocopy會跟著資料夾一起複製，會導致einvoice軟體上傳失敗
+功能就是把所有C0401、C0501、C0601、D00301、D0401、D0501、C0701裡頭的發票檔
+全部整丟到C:\test上，方便後續用robocopy做分類move
+robocopy C:\test\ C:\EINVTurnkey\DATA\UpCast\B2CSTORAGE\C0401\SRC C0401*.XML/xo /maxage:1 /LOG+:C:\test\backup.txt
+test資料夾裏頭的*.xml發票檔，依照已開立，已作廢等丟到EINVTurnkey的C0401的UpCast上
+/LOG+:C:\test\backup.txt　這段是做完之後將log留下來，以便後續找bug
+上段只要把C0401的數字改成其他財政部規定的值就可以了
+robocopy C:\test\ C:\EINVTurnkey\DATA\UpCast\B2CSTORAGE\C0501\SRC C0501*.XML/xo /maxage:1 /LOG+:C:\test\backup.txt
+最後把test資料夾裡的.xml刪除就可以
+del /S C:\test\*.xml 
+不用這個指令也可以，robocopy指令加一行/MOVE就可以了
+使用幾天都沒有異常，但一旦發票數量達上千張的時候，robocopy指令就出現bug了
+ 已啟動 :
+來源 : C:\test\ 目的地 : C:\EINVTurnkey\DATA\UpCast\B2CSTORAGE\C0701\SRC\</description>
+    </item>
+    
+  </channel>
+</rss>

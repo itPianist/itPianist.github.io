@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ZH-TW"><head>
+    <title>IT的不參不肆</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="theme-color" content="#000084" />
+    <link rel="icon" href="https://itpianist.github.io/favicon.ico">
+    <link rel="canonical" href="https://itpianist.github.io">
+    
+    
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"></button>
+            <a class="brand" href="https://itpianist.github.io">IT的不參不肆</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    
+                    
+                        
+                            <li>
+                                <a href="/about/">
+                                    
+                                    <span>關於我</span>
+                                </a>
+                            </li>
+                        
+                    
+                        
+                            <li>
+                                <a href="/post/">
+                                    
+                                    <span>所有文章</span>
+                                </a>
+                            </li>
+                        
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav><div id="content" class="container">
+
+<div class="row-fluid navmargin">
+    <div class="page-header">
+        <h1>電子發票上傳失敗 Part2 - Mon, Mar 12, 2018</h1>
+    </div>
+    <p class="lead">robocopy複製數量多的檔案會判斷錯誤，於是改成fastcopy來做</p>
+    <p>利用fastcopy軟體來copy發票檔，指令大同小異，一樣也是從Tunkey主機上做</p>
+<p>依舊掛載pos server主機上存放發票資料檔</p>
+<p>定義為Z槽</p>
+<p><code>net use Z:\\\192.168.1.1\pos\EINVOICE_XML\ /user:帳號　密碼</code></p>
+<p>只是我把2018資料夾給拿掉，fastcopy加一行時間函數，跨年就不用去改掛載資料夾</p>
+<p><code>C:\test\FastCopy\FastCopy.exe /cmd=diff /to_date=&quot;+12h&quot; /auto_close /estimate /logfile=&quot;C:\test\fastcopy.txt&quot; /include=&quot;*.xml&quot; &quot;Z:\&quot; /to=&quot;C:\einvt_xml&quot;</code></p>
+<p>注意一點的是Fastcopy的執行檔要指定，如果指定錯誤位置，fastcopy會沒作用</p>
+<ol>
+<li>
+<p>/cmd=diff</p>
+<p>diff這指令是複製指令，也可以用move指令，因為要留一份在pos主機上</p>
+<p><strong>/cmd=
+(noexist_only
+| diff
+| update
+| force_copy
+| sync
+| move
+| delete)</strong></p>
+</li>
+<li>
+<p>/to_date=&quot;+12h&rdquo;</p>
+<p>這個是時間函數，指令最新的時間，+12h是12小時內產生的檔案會複製，超過12h外產生的資料不複製，也就是這條指令，掛載Einvoice就不會每年改一次掛載資料夾</p>
+</li>
+<li>
+<p>/auto_close</p>
+<p>複製完之後自動關閉</p>
+</li>
+<li>
+<p>/estimate</p>
+<p>複製copy預估完成時間，這條可加可不加</p>
+</li>
+<li>
+<p>/logfile=&quot;C:\test\fastcopy.txt&rdquo;</p>
+<p>複製完成之後產出log，會這樣做的原因也是避免像robocopy有bug的問題</p>
+</li>
+<li>
+<p>/include=&rdquo;*.xml&rdquo;</p>
+<p>只有xml檔案會複製，其他排除</p>
+</li>
+<li>
+<p>&ldquo;Z:&quot; /to=&quot;C:\einvt_xml&rdquo;</p>
+<p>將發票資料檔複製到C:\einvt_xml上</p>
+</li>
+</ol>
+<p><code>@for /r C:\einvt_xml\ %%f in (*.xml) do move &quot;%%f&quot; C:\test</code></p>
+<p>這段作用跟robocopy一樣</p>
+<p><code>C:\test\FastCopy\FastCopy.exe /cmd=diff /auto_close /estimate /logfile=&quot;C:\test\C0401.txt&quot; /include=&quot;C0401*.xml&quot; &quot;C:\test\&quot; /to=&quot;C:\EINVTurnkey\DATA\UpCast\B2CSTORAGE\C0401\SRC&quot;</code></p>
+<p>開始將發票複製到對應的upcast上，並寫入log檔</p>
+<p>以上指令只要將C0401改成對應的發票cast就可以了</p>
+<p><code>del /S C:\test\*.xml</code></p>
+<p>最後再把test資料夾的發票檔刪除掉就可以了，當然也將**/cmd=diff**　改成/cmd=move</p>
+<p>就少了刪除的步驟而已，當然為了減少一堆空目錄，我還會下兩條指令</p>
+<p><code>for /f &quot;usebackq&quot; %%d in (</code>&quot;dir C:\test /ad/b/s | sort /R&quot;<code>) do rd &quot;%%d&quot; for /f &quot;usebackq&quot; %%d in (</code>&quot;dir C:\einvt_xml /ad/b/s | sort /R&quot;<code>) do rd &quot;%%d&quot;</code></p>
+<p>刪除目錄</p>
+<p>產出的log如下</p>
+<hr>
+<p>FastCopy(ver3.26) 開始於 2018/02/04 02:20:11</p>
+<p>&lt;來源&gt;  C:\test\<br>
+<!-- raw HTML omitted --> C:\EINVTurnkey\DATA\UpCast\B2CSTORAGE\C0401\SRC
+&lt;包含&gt; C0401*.xml<br>
+&lt;命令&gt; 銴ˊ-憒?瑼?憭批??????瑼?銝???</p>
+<p>－－－－－－－－－－－－－－－－－－－－－－－－－</p>
+<p>無錯誤</p>
+<p>總計讀取   = 7.6 MB
+總計寫入   = 7.6 MB
+檔案總數   = 5,858 (0)
+總計略過   = 0.0 MB
+略過檔案   = 1 (0)
+時間總計   = 01:39
+傳輸速率   = 0.08 MB/s
+檔案速率= 59.1 個檔案/秒</p>
+<p>結果:    (錯誤檔案 : 0 / 錯誤目錄: 0)</p>
+<hr>
+<p>關於&lt;命令&gt;變成亂碼的原因是FastCopy的版本問題，我也懶得改了</p>
+<p><!-- raw HTML omitted -->20200110更新近況<!-- raw HTML omitted --></p>
+<p>除了Tunkey主機停電關機，開機掛載失敗以外</p>
+<p>運作兩年都沒發生錯誤</p>
+
+    <h4><a href="https://itpianist.github.io"></a></h4>
+</div>
+
+
+        </div><footer class="container">
+    <hr class="soften">
+    <p>
+
+    <a href="itPianist.github.io">跌跌撞撞且坎坷MIS路</a> | 
+
+&copy; 
+
+    itPianist
+
+<span id="thisyear">2020</span>
+
+
+        |  <a href="//gohugo.io" target="_blank">Hugo</a>
+</p>
+    <p class="text-center">
+        
+        
+        
+        
+        
+    </p>
+</footer>
+
+</body><link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="/css/bootstrap-responsive.css">
+<link rel="stylesheet" href="/css/style.css">
+
+<script src="/js/jquery.js"></script>
+<script src="/js/bootstrap-386.js"></script>
+<script src="/js/bootstrap-transition.js"></script>
+<script src="/js/bootstrap-alert.js"></script>
+<script src="/js/bootstrap-modal.js"></script>
+<script src="/js/bootstrap-dropdown.js"></script>
+<script src="/js/bootstrap-scrollspy.js"></script>
+<script src="/js/bootstrap-tab.js"></script>
+<script src="/js/bootstrap-tooltip.js"></script>
+<script src="/js/bootstrap-popover.js"></script>
+<script src="/js/bootstrap-button.js"></script>
+<script src="/js/bootstrap-collapse.js"></script>
+<script src="/js/bootstrap-carousel.js"></script>
+<script src="/js/bootstrap-typeahead.js"></script>
+<script src="/js/bootstrap-affix.js"></script>
+<script>
+    _386 = { 
+        fastLoad: false ,
+        onePass: false , 
+        speedFactor: 1 
+    };
+
+    
+    function ThisYear() {
+        document.getElementById('thisyear').innerHTML = new Date().getFullYear();
+    };
+</script></html>

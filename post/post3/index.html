@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ZH-TW"><head>
+    <title>IT的不參不肆</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="theme-color" content="#000084" />
+    <link rel="icon" href="https://itpianist.github.io/favicon.ico">
+    <link rel="canonical" href="https://itpianist.github.io">
+    
+    
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"></button>
+            <a class="brand" href="https://itpianist.github.io">IT的不參不肆</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    
+                    
+                        
+                            <li>
+                                <a href="/about/">
+                                    
+                                    <span>關於我</span>
+                                </a>
+                            </li>
+                        
+                    
+                        
+                            <li>
+                                <a href="/post/">
+                                    
+                                    <span>所有文章</span>
+                                </a>
+                            </li>
+                        
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav><div id="content" class="container">
+
+<div class="row-fluid navmargin">
+    <div class="page-header">
+        <h1>911中毒事件part3 - Tue, Sep 11, 2018</h1>
+    </div>
+    <p class="lead">老舊電腦太多，各單位隨意拿隨身碟做檔案交換，導致資安事件</p>
+    <p><img src="/img/post2-1.jpg" alt=""></p>
+<p><strong>上圖為ocs盤點全公司OS數量，XP數量還是佔多數</strong></p>
+<p>上半年不斷協調各單位適應windows7以及排除erp及財會軟體在windows7上的安全性要求，<del>不然圖上數量windows7的數量會更少</del></p>
+<p>由於財會軟體及erp系統，導致前人購入電腦windows 7之後都會要求廠商降為windows xp，但windows xp在2014就停止更新了</p>
+<p>而上半年呈報告給上層，說明xp已經不堪使用，再來防毒軟體在第二季停止更新xp作業系統，形同資安缺口</p>
+<p>因為這次事件之前本人努力將各單位能夠升級到windows7的電腦</p>
+<p>幾乎都升級上去，剩下的都是老舊無法升級的電腦</p>
+<p>（早期購入windows7都降版成windows xp）</p>
+<p><img src="/img/post2-2.jpg" alt=""></p>
+<p><strong>sophos central 已經跳出不支援xp，除非購買擴充支援</strong></p>
+<p><del>依我方的的U數，廠商報價是一台汽車價格</del></p>
+<p>目前處理方法順序如下</p>
+<ol>
+<li>
+<h3 id="將營運線路與office節點做斷線">將營運線路與office節點做斷線</h3>
+<p>無論有無做vlan，建議switch實體拔除</p>
+</li>
+<li>
+<h3 id="準備大量的usb隨身碟或光碟片">準備大量的usb隨身碟或光碟片</h3>
+<p>這點是為了準備PE掃毒軟體，在各單位部門電腦上實施掃毒</p>
+</li>
+<li>
+<h3 id="將file-server上的資料全部清點">將file server上的資料全部清點，</h3>
+<p>先要將重要的生產環境與辦公室環境連線拔除</p>
+<p>以免擴散到生產環境，也因為file server過於老舊</p>
+<p>(server 2003)</p>
+<p>而各單位交換檔案也會透過這台file server</p>
+<p>才會蔓延的如此快，因為此事件是發生在晚間八點多</p>
+<p>各後勤單位都已經下班，只剩營業單位，受害單位及範圍比較小</p>
+</li>
+</ol>
+
+    <h4><a href="https://itpianist.github.io"></a></h4>
+</div>
+
+
+        </div><footer class="container">
+    <hr class="soften">
+    <p>
+
+    <a href="itPianist.github.io">跌跌撞撞且坎坷MIS路</a> | 
+
+&copy; 
+
+    itPianist
+
+<span id="thisyear">2020</span>
+
+
+        |  <a href="//gohugo.io" target="_blank">Hugo</a>
+</p>
+    <p class="text-center">
+        
+        
+        
+        
+        
+    </p>
+</footer>
+
+</body><link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="/css/bootstrap-responsive.css">
+<link rel="stylesheet" href="/css/style.css">
+
+<script src="/js/jquery.js"></script>
+<script src="/js/bootstrap-386.js"></script>
+<script src="/js/bootstrap-transition.js"></script>
+<script src="/js/bootstrap-alert.js"></script>
+<script src="/js/bootstrap-modal.js"></script>
+<script src="/js/bootstrap-dropdown.js"></script>
+<script src="/js/bootstrap-scrollspy.js"></script>
+<script src="/js/bootstrap-tab.js"></script>
+<script src="/js/bootstrap-tooltip.js"></script>
+<script src="/js/bootstrap-popover.js"></script>
+<script src="/js/bootstrap-button.js"></script>
+<script src="/js/bootstrap-collapse.js"></script>
+<script src="/js/bootstrap-carousel.js"></script>
+<script src="/js/bootstrap-typeahead.js"></script>
+<script src="/js/bootstrap-affix.js"></script>
+<script>
+    _386 = { 
+        fastLoad: false ,
+        onePass: false , 
+        speedFactor: 1 
+    };
+
+    
+    function ThisYear() {
+        document.getElementById('thisyear').innerHTML = new Date().getFullYear();
+    };
+</script></html>
