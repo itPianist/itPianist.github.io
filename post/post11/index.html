@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ZH-TW"><head>
+    <title>IT的不參不肆</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="theme-color" content="#000084" />
+    <link rel="icon" href="https://itpianist.github.io/favicon.ico">
+    <link rel="canonical" href="https://itpianist.github.io">
+    
+    
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"></button>
+            <a class="brand" href="https://itpianist.github.io">IT的不參不肆</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    
+                    
+                        
+                            <li>
+                                <a href="/about/">
+                                    
+                                    <span>關於我</span>
+                                </a>
+                            </li>
+                        
+                    
+                        
+                            <li>
+                                <a href="/post/">
+                                    
+                                    <span>所有文章</span>
+                                </a>
+                            </li>
+                        
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav><div id="content" class="container">
+
+<div class="row-fluid navmargin">
+    <div class="page-header">
+        <h1>windows SSL憑證轉移至 ubuntu - Wed, Mar 3, 2021</h1>
+    </div>
+    <p class="lead">Chrome更新至84版出現插入式全頁警告，正式移除TLS 1.0/1.1支援 </p>
+    <p>Chrome Browser 更新至84之後，我司官方網站跳出全頁警告</p>
+<p>因為我司官方網站還是採用TLS 1.0的協定</p>
+<p>畢竟Chrome使用人數相當多，也不能忽視此警告</p>
+<p>於是要求網頁部門著手更新官方網站</p>
+<p>目前舊網站還是架在2008 R2上，並且購買了2+1 SSL憑證</p>
+<p>一來OS過於老舊，二來新官網採用ubuntu 20.04 LTS</p>
+<p>原本想採用Centos 8 但RedHat 在2020年底宣布Centos 8 提前8年終止技術服務</p>
+<p>所以果斷捨棄Centos當Web server，直接選用ubuntu 來使用</p>
+<p>更何況ubuntu  LTS　安全維護年限長達十年</p>
+<p>目前能做的就是把2008 R2上的SSL 憑證匯出，只是網路上的資源大多數都是</p>
+<p>windows 轉移到windows 比較少windows 轉移到linux</p>
+<p>先將windows server 2008 r2上的主機憑證匯出來</p>
+<p>這網路上教學不少</p>
+<p>在windows上操作會比較簡單一點</p>
+<p>先準備好匯出的pfx檔案</p>
+<p>利用git這套裡面內建的sslopen來把PKCS12的憑證檔轉換成Apache的格式</p>
+<p><a href="https://git-scm.com/download/win">https://git-scm.com/download/win</a></p>
+<p>git有分setup跟portable</p>
+<p>下載portable版就可以省去安裝的步驟</p>
+<p>下pfx憑證放的位置</p>
+<p>sslopen.exe的路徑在PortableGit\usr\bin</p>
+<p>直接進去bin的路徑，按住Shift+滑鼠右鍵，就可以開啟該目錄的 PowerShell</p>
+<p><img src="/img/11-1.jpg" alt=""></p>
+<p>輸入</p>
+<pre><code>.\openssl.exe pkcs12 -in D:\TWCA\exportcert.pfx -out D:\TWCA\exportcert.txt -nodes
+</code></pre><p>會要求輸入憑證當時設定的密碼</p>
+<p><img src="/img/11-2.jpg" alt=""></p>
+<p>輸入完成之後，D:\TWCA就會出現exportcert.txt</p>
+<p>這個就是Apache的格式</p>
+<p><img src="/img/11-3.jpg" alt="">
+<img src="/img/11-3.jpg" alt=""></p>
+<p>建立<strong>伺服器私鑰</strong>跟<strong>伺服器憑證</strong></p>
+<p>檔名分別是server.key跟server.crt</p>
+<p>打開exportcert.txt將裡面的BEGIN PRIVATE KEY跟BEGIN CERTIFICATE分別放入key跟crt</p>
+<p>server.key</p>
+<h4 id="-----begin-private-key-----">&mdash;&ndash;BEGIN PRIVATE KEY&mdash;&ndash;</h4>
+<p>oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo</p>
+<p>mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm</p>
+<p>bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb</p>
+<p>nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn</p>
+<h4 id="-----end-private-key-----">&mdash;&ndash;END PRIVATE KEY&mdash;&ndash;</h4>
+<p>server.crt</p>
+<h4 id="-----begin-certificate-----">&mdash;&ndash;BEGIN CERTIFICATE&mdash;&ndash;</h4>
+<p>oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo</p>
+<p>mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm</p>
+<p>bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb</p>
+<p>nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn</p>
+<h4 id="-----end-certificate-----">&mdash;&ndash;END CERTIFICATE&mdash;&ndash;</h4>
+<p><img src="/img/11-4.jpg" alt=""></p>
+<p><img src="/img/11-5.jpg" alt=""></p>
+<p>這兩個檔案就放到新主機上，其實路徑可以隨便放，只要記得apache2\sites-enbled 目錄下的</p>
+<p>000-default-ssl.conf 的憑證指向必須是在你放的路徑上，就可以了</p>
+<p>不過方便管理，都建議放在/etc/ssl底下的目錄</p>
+<p>server.key與crt建議做校驗MD5，來確認上傳正不正常</p>
+<p>如果是利用FTP上傳，大多軟體預設都是自動模式，而不是二進制上傳</p>
+<p>用微軟FTP上傳若沒指定Binary的話，預設也是ASCII上傳</p>
+<p><code>md5sum server.key</code></p>
+<p>本機上利用PowerShell 來校驗key</p>
+<p><code>Get-FileHash server.key -Algorithm MD5</code></p>
+<p><img src="/img/11-5.jpg" alt=""></p>
+<p><img src="/img/11-6.jpg" alt=""></p>
+<p>確定一致之後再來做後續憑證匯入才不會發生問題</p>
+
+    <h4><a href="https://itpianist.github.io"></a></h4>
+</div>
+
+
+        </div><footer class="container">
+    <hr class="soften">
+    <p>
+
+    <a href="itPianist.github.io">跌跌撞撞且坎坷MIS路</a> | 
+
+&copy; 
+
+    itPianist
+
+<span id="thisyear">2020</span>
+
+
+        |  <a href="//gohugo.io" target="_blank">Hugo</a>
+</p>
+    <p class="text-center">
+        
+        
+        
+        
+        
+    </p>
+</footer>
+
+</body><link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="/css/bootstrap-responsive.css">
+<link rel="stylesheet" href="/css/style.css">
+
+<script src="/js/jquery.js"></script>
+<script src="/js/bootstrap-386.js"></script>
+<script src="/js/bootstrap-transition.js"></script>
+<script src="/js/bootstrap-alert.js"></script>
+<script src="/js/bootstrap-modal.js"></script>
+<script src="/js/bootstrap-dropdown.js"></script>
+<script src="/js/bootstrap-scrollspy.js"></script>
+<script src="/js/bootstrap-tab.js"></script>
+<script src="/js/bootstrap-tooltip.js"></script>
+<script src="/js/bootstrap-popover.js"></script>
+<script src="/js/bootstrap-button.js"></script>
+<script src="/js/bootstrap-collapse.js"></script>
+<script src="/js/bootstrap-carousel.js"></script>
+<script src="/js/bootstrap-typeahead.js"></script>
+<script src="/js/bootstrap-affix.js"></script>
+<script>
+    _386 = { 
+        fastLoad: false ,
+        onePass: false , 
+        speedFactor: 1 
+    };
+
+    
+    function ThisYear() {
+        document.getElementById('thisyear').innerHTML = new Date().getFullYear();
+    };
+</script></html>

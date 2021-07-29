@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>server on IT的不參不肆</title>
+    <link>https://itpianist.github.io/categories/server/</link>
+    <description>Recent content in server on IT的不參不肆</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Sat, 14 Mar 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://itpianist.github.io/categories/server/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>新建置的Synology、HDD出現了損毀</title>
+      <link>https://itpianist.github.io/post/post8/</link>
+      <pubDate>Sat, 14 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://itpianist.github.io/post/post8/</guid>
+      <description>建置沒多久的Synology　RS2418RP+
+早上發出短蜂鳴聲，進去看之後發現了
+一顆HDD發出損壞警告，緊急拆下來之後，原本想要送修
+先拆另外一台RS2418RP+備機上的HDD來使用
+過沒多久還是跳出警告，只好開case
+過沒多久原廠給了回覆，回覆如下
+根據判斷，此原因為已知的問題，雖然您所使用的硬碟為相容清單的硬碟（ST8000NM000A-2KE101），但是其frimware 是SN01並不是清單列表上的SN02 [1]，目前已知使用在該款硬碟使用FW：SN01 的確會造成硬碟回應過導致系統將該硬碟踢出儲存集區(請參考下方log[2])。所以要解決此問題有兩種方式，第一個為停用硬碟的 write cache, 但是可能會造成寫入效能問題，第二種作法為請您聯絡硬碟廠商將FW更新到SN02來避免此問題。依照原廠的規定購買此相容清單上的硬碟，但frimware版本不符合，導致回應過度
+再來因為寫入速度問題，都會將write cache打開，如果不打開也許不會發生這次事件
+就只能更新frimware版本了</description>
+    </item>
+    
+  </channel>
+</rss>

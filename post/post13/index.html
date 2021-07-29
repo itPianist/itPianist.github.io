@@ -44,37 +44,31 @@
         </div>
     </div>
 </nav><div id="content" class="container">
-<article class="row-fluid navmargin">
-    <header class="page-header">
-        <h1>Tags</h1>
-    </header>
-    
-    
-</article>
-<ul>
 
+<div class="row-fluid navmargin">
+    <div class="page-header">
+        <h1>microsoft store 非管理者可以安裝 - Tue, May 25, 2021</h1>
+    </div>
+    <p class="lead">因某高層長官需要利用iTunes，來備份手機資料，然而外接裝置跟安裝權限都鎖住</p>
+    <p>關掉方法有兩種，一個是從firewall上上手，不過依照防火牆廠牌不同，Paloalto相較之下好設定許多</p>
+<p>直接將ms-store擋掉就可以了，另外一個就必須要去Active Directory下GPO，直接開啟範本</p>
+<p>將此服務關閉，否則一般使用者可以不透過administrator的權限去安裝軟體</p>
+<p>尤其安裝VPN　這個就會形成漏洞</p>
+<p><img src="/img/post13-1.jpg" alt=""></p>
+<p>Active Directory　GPO設定</p>
+<p><img src="/img/13-2.jpg" alt=""></p>
+<p>windows10與之前的windows不太一樣的地方</p>
+<p>加入了市集功能(<em>Microsoft Store</em>)</p>
+<p>就以前的習慣，只要把user的權限設定在domain user的權限上</p>
+<p>基本上就能有效限制使用者安裝軟體的問題</p>
+<p>但10導入了Microsoft Store，使用者使用ios手機連接到電腦上</p>
+<p>居然可以強制連結，在防毒軟體的usb裝置限制與AD的限制</p>
+<p>可以透過IOS傳輸數據，只要從Store上安裝apple itunes</p>
+<p>就可以避開一切限制</p>
 
-    <li>
-        <a href="https://itpianist.github.io/tags/ubuntu/">2021-03-03 | ubuntu</a>
-    </li>
+    <h4><a href="https://itpianist.github.io"></a></h4>
+</div>
 
-    <li>
-        <a href="https://itpianist.github.io/tags/server/">2020-12-11 | Server</a>
-    </li>
-
-    <li>
-        <a href="https://itpianist.github.io/tags/synology/">2020-03-14 | Synology</a>
-    </li>
-
-    <li>
-        <a href="https://itpianist.github.io/tags/clonezilla/">2020-02-20 | clonezilla</a>
-    </li>
-
-    <li>
-        <a href="https://itpianist.github.io/tags/%E8%B3%87%E5%AE%89%E4%BA%8B%E4%BB%B6/">2018-09-11 | 資安事件</a>
-    </li>
-
-</ul>
 
         </div><footer class="container">
     <hr class="soften">

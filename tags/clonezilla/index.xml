@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>clonezilla on IT的不參不肆</title>
+    <link>https://itpianist.github.io/tags/clonezilla/</link>
+    <description>Recent content in clonezilla on IT的不參不肆</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Thu, 20 Feb 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://itpianist.github.io/tags/clonezilla/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>利用clonezilla完成電腦大量部屬</title>
+      <link>https://itpianist.github.io/post/post9/</link>
+      <pubDate>Thu, 20 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://itpianist.github.io/post/post9/</guid>
+      <description>911中毒事件之後，公司確定要全面將XP電腦汰換掉，目前無法升級或過於老舊
+的電腦不下七十台，往年的做法就是拿硬碟座HDD Clone HDD
+但會遇到SSID的問題，另外只能一台一台拆下硬碟，再來品牌電腦HDD跟保固綁在一起
+如果HDD拆下裝上亂掉之後，送修可能就會有問題。
+所以架再生龍來大量部屬
+可以參考國網提供的教學
+http://clonezilla.nchc.org.tw/clonezilla-live/bt-from-disk/
+步驟如連結上的一樣
+這邊提供遇到的問題
+一、盡量用比較高等級的switch 去做大量部屬
+如果是用低階的switch ，同樣用23 Port 去Multicast效率很明顯
+例如使用D-link 1024G 的設備與使用HPE 1920S 24G
+兩者差了兩個小時以上
+D-link 1024G 兩個半小時完成23台的部屬
+HPE 1920S 24G 半個小時就完成了23台的部屬
+二、如果同型號只是CPU等級不同，建議CPU較高的來做主機，這樣效率也會比較高一點
+三、建議要做部屬的電腦開機啟動使用legacy為主，使用uefi失敗率頗高，常在開機XPE接收DHCP
+時就無法接收到主機的分配IP，當然也無法繼續下一步
+四、Clonezilla最大一次部屬是100台，假設今天要部屬的是75台，請不要輸入75台，直接輸入100台
+派送失敗也算一台。
+五、要一次做一百台派送也沒問題，如果場地跟電源、網路線還有switch都允許的話
+我一個人50台電腦四個小時完成，包括拆箱、BIOS設定XPE，通常前面是最花時間的
+(24Port switch 拆箱開機設定BIOS Clonezilla設定完成電腦關機→完成後裝箱 )
+六、如果是長期需要做固定還原的需求，建議是架設DRBL Server 如果有DRBL 台數基本上可以超過一百台</description>
+    </item>
+    
+  </channel>
+</rss>

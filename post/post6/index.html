@@ -44,37 +44,52 @@
         </div>
     </div>
 </nav><div id="content" class="container">
-<article class="row-fluid navmargin">
-    <header class="page-header">
-        <h1>Tags</h1>
-    </header>
-    
-    
-</article>
-<ul>
 
+<div class="row-fluid navmargin">
+    <div class="page-header">
+        <h1>利用fastcopy搭配ftp script來做自動化排程 - Fri, Dec 11, 2020</h1>
+    </div>
+    <p class="lead">FTP排程下載並分類發票種類</p>
+    <p>近期公司增加停車管理系統，以前都是採人工停車收費，換停管系統之後</p>
+<p>後續處理開立發票事宜，已經從二聯式換成電子發票了</p>
+<p>只是廠商提供發票產出而已，後續發票上傳就由我司這邊做</p>
+<p>只是他們只提供從FTP下載而已</p>
+<p>利用OS提供的基本FTP來做檔案下載，再利用Fastcopy來達成發票分類</p>
+<p>先寫ftp登入的script 開啟notepad</p>
+<pre><code>ftpuser   //ftp帳號
+ftppassword  //ftp密碼
+binary //二進位制上傳或ASCII傳輸模式 *依檔案內容需求做調整
+prompt off //互動模式關閉
 
-    <li>
-        <a href="https://itpianist.github.io/tags/ubuntu/">2021-03-03 | ubuntu</a>
-    </li>
+lcd C:\xml //設定本機放發票的資料夾
 
-    <li>
-        <a href="https://itpianist.github.io/tags/server/">2020-12-11 | Server</a>
-    </li>
+cd /C0401 //設定FTP所在資料夾 *依FTP server設定產出的資料夾
+mget *.xml //下載該資料夾下的所有xml檔案
 
-    <li>
-        <a href="https://itpianist.github.io/tags/synology/">2020-03-14 | Synology</a>
-    </li>
+cd /C0501 //設定FTP所在資料夾 *依FTP server設定產出的資料夾
+mget *.xml //下載該資料夾下的所有xml檔案
 
-    <li>
-        <a href="https://itpianist.github.io/tags/clonezilla/">2020-02-20 | clonezilla</a>
-    </li>
+//以上依需求設定
+</code></pre><p>儲存之後命名為ftp.log *依需求去做命名</p>
+<p>如果產出的目錄簡單，其實從FTP直接下載到Tunkey也是可以</p>
+<p>把lcd路徑改成Tunkey放C0401就能直接從ftp下載</p>
+<p>因為要留下LOG檔來確定FTP上的發票數量正不正確跟有無傳輸成功</p>
+<p>另外留下備份需求，所以才會多一個步驟來做</p>
+<p>建立批次檔</p>
+<pre><code>@echo off
+ftp -v -s:D:\ftp.log 192.168.100.1 \\開啟ftp.log script執行ftp下載
 
-    <li>
-        <a href="https://itpianist.github.io/tags/%E8%B3%87%E5%AE%89%E4%BA%8B%E4%BB%B6/">2018-09-11 | 資安事件</a>
-    </li>
+C:\test\fastcopy\fastcopy.exe /cmd=diff /auto_close /estimate /logfile=&quot;C:\XML\xml_log.log&quot; /include=&quot;C0401*.xml&quot; &quot;C:\XML&quot; /to=&quot;c:\EINVTurnkey\Upcast\B2CSTORAGE\C0401\SRC&quot;
 
-</ul>
+</code></pre><p>以上改成C0401改成C0501</p>
+<p>就可以將檔案依照C0501開頭丟進相應的上傳資料夾</p>
+<p>這邊需要注意的事情就是，如果利用微軟FTP來做下載，會依當下啟動的時間來定義檔案時間戳記</p>
+<p>除非用FileZilla、NCFTP等第三方軟體，才有可能保留時間戳記，否則利用fastcopy的/from_date</p>
+<p>否則用時間去做判斷下載的作用不大</p>
+
+    <h4><a href="https://itpianist.github.io"></a></h4>
+</div>
+
 
         </div><footer class="container">
     <hr class="soften">

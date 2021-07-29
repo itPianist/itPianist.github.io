@@ -55,7 +55,7 @@ del /S C:\test\*.xml
 定義為Z槽
 net use Z:\\\192.168.1.1\pos\EINVOICE_XML\ /user:帳號　密碼
 只是我把2018資料夾給拿掉，fastcopy加一行時間函數，跨年就不用去改掛載資料夾
-C:\test\FastCopy\FastCopy.exe /cmd=diff /to_date=&amp;quot;+12h&amp;quot; /auto_close /estimate /logfile=&amp;quot;C:\test\fastcopy.txt&amp;quot; /include=&amp;quot;*.xml&amp;quot; &amp;quot;Z:\&amp;quot; /to=&amp;quot;C:\einvt_xml&amp;quot;
+C:\test\FastCopy\FastCopy.exe /cmd=diff /for_date=&amp;quot;+12h&amp;quot; /auto_close /estimate /logfile=&amp;quot;C:\test\fastcopy.txt&amp;quot; /include=&amp;quot;*.xml&amp;quot; &amp;quot;Z:\&amp;quot; /to=&amp;quot;C:\einvt_xml&amp;quot;
 注意一點的是Fastcopy的執行檔要指定，如果指定錯誤位置，fastcopy會沒作用
   /cmd=diff
 diff這指令是複製指令，也可以用move指令，因為要留一份在pos主機上

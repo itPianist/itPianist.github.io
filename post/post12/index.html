@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ZH-TW"><head>
+    <title>IT的不參不肆</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="theme-color" content="#000084" />
+    <link rel="icon" href="https://itpianist.github.io/favicon.ico">
+    <link rel="canonical" href="https://itpianist.github.io">
+    
+    
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"></button>
+            <a class="brand" href="https://itpianist.github.io">IT的不參不肆</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    
+                    
+                        
+                            <li>
+                                <a href="/about/">
+                                    
+                                    <span>關於我</span>
+                                </a>
+                            </li>
+                        
+                    
+                        
+                            <li>
+                                <a href="/post/">
+                                    
+                                    <span>所有文章</span>
+                                </a>
+                            </li>
+                        
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav><div id="content" class="container">
+
+<div class="row-fluid navmargin">
+    <div class="page-header">
+        <h1>利用clonezilla來取代ghost來製作一鍵還原隨身碟 - Wed, May 12, 2021</h1>
+    </div>
+    <p class="lead">製作一鍵還原隨身碟 </p>
+    <p>最近朋友接到一個案子，LED控制跑馬燈的主機</p>
+<p>因為去年被駭的資安問題，所以工控電腦要重新安裝系統</p>
+<p>也因為資安問題，不能使用無授權或者是有資安疑慮的ghost</p>
+<p>所以利用國網中心開發的Clonezilla 再生龍來製作一鍵還原</p>
+<p><img src="/img/16-1.jpg" alt=""></p>
+<p>以我先前製作營業單位的POS機的還原隨身碟的範例來示範</p>
+<p>由於不知道工控主機是用MBR或UEFI的機器開機</p>
+<p>因為兩者修改的檔案是不一樣的</p>
+<p>在MBR為主的主機上，Clonezilla 修改的檔案是</p>
+<p><code>/syslinux/syslinux.cfg</code></p>
+<p>在uEFI為主機的主機上，Clonezilla 修改的檔案是</p>
+<p><code>/boot/grub/grub.cfg</code></p>
+<p>兩者寫法稍微不同，不過下的指令是相同的</p>
+<p>先準備好一張圖片，取代掉/syslinux/ocswp.png
+像素為640x480</p>
+<p><del>像素太高的話，開機畫面會整個糊掉</del></p>
+<p>編輯syslinux.cfg該檔案</p>
+<blockquote>
+<h4 id="simple-menu-title">simple menu title</h4>
+<p>MENU TITLE</p>
+</blockquote>
+<p>clonezilla.org, clonezilla.nchc.org.tw</p>
+<p>這個可以修改你要的標題</p>
+<p>通常我都會把MENU DEFAULT的預設Clonezilla live留下來</p>
+<p>以防後續操作人員操作失當或要使用Clonezilla 做backup 可以用上</p>
+<pre><code>label test bbb
+MENU DEFAULT
+# MENU HIDE
+MENU LABEL Supermarket POS 002
+# MENU PASSWD
+</code></pre><p>Supermarket POS 002 開機選單呈現出來的畫面</p>
+<pre><code>kernel /live/vmlinuz
+  append initrd=/live/initrd.img boot=live hostname=maverick config  noswap locales=zh_TW.UTF-8 keyboard-layouts=us edd=on nomodeset noprompt ocs_prerun1=&quot;mount /dev/sdb2 /mnt/&quot; ocs_prerun2=&quot;mount --bind /mnt/Backup /home/partimag/&quot; ocs_live_run=&quot;ocs-live-restore&quot; ocs_live_extra_param=&quot;-g auto -e1 auto -scr -c -e2 -j2 -p poweroff restoredisk 2021-05-03-11_pos001-img sda&quot; ocs_live_keymap=&quot;NONE&quot; ocs_live_batch=&quot;yes&quot; ocs_lang=&quot;zh_TW.UTF-8&quot; vga=788 ip=frommedia  nosplash
+</code></pre><p><code>TEXT HELP</code></p>
+<p><code>BACKUP time 2021-05-03</code>
+<code>ENDTEXT</code></p>
+<p>這邊可以寫備註，我是寫備份時間</p>
+<p>以下是需要調整的地方</p>
+<pre><code>locales=zh_TW.UTF-8 keyboard-layouts=us
+</code></pre><p>進去之後自動選擇語言跟鍵盤</p>
+<p>zh_TW.UTF-8 台灣語系</p>
+<p>us 鍵盤選項</p>
+<p>如果這類沒填的話，進去還會要求你選擇</p>
+<pre><code>ocs_prerun1=&quot;mount /dev/sdb2 /mnt/&quot; ocs_prerun2=&quot;mount --bind /mnt/Backup /home/partimag/
+</code></pre><p>這類就是依照你是用什麼硬體設備，外接HDD，linux都會定義成sdb，工控主機的硬碟會定義成sda</p>
+<p>USB隨身碟會定義成sdc，不過建議還是下lsblk確認硬碟裝置</p>
+<p>由於我把外接硬碟切成sdb1跟sdb2</p>
+<p>sdb1給1G空間放Clonezilla，剩餘空間全部給sdb2放映像檔</p>
+<p>上述指令就是掛載存放映像檔的地方</p>
+<p>由於我把映像檔放在sdb2底下的Backup的資料夾，這段指令會把Backup mount到partimag</p>
+<p>這樣後續指令才能讀到backup底下的映像檔，做recover</p>
+<pre><code>ocs_live_extra_param=&quot;-g auto -e1 auto -scr -c -e2 -j2 -p
+</code></pre><p>這代碼就是在進階選項上的指令</p>
+<p>可以參考</p>
+<p><img src="/img/12-2.jpg" alt=""></p>
+<p>將-c取消掉的話，開機一旦選了之後就一路做到底了</p>
+<p>將-scr取消掉的話，直接不檢查該映像檔是否有損壞就直接還原了</p>
+<pre><code>poweroff restoredisk 2021-05-03-11_pos001-img sda
+</code></pre><p>poweroff這個指令是整個recover完之後，對本機做關機的指令</p>
+<p>如果是reboot的話則是重開機</p>
+<p>restoredisk</p>
+<p>是還原印象檔到本機硬碟</p>
+<p>如果是還原分割區可以下restoredisk</p>
+<p><img src="/img/12-3.jpg" alt=""></p>
+<p>2021-05-03-11_pos001-img</p>
+<p>這個是映像檔的名稱</p>
+<p>sda是工控主機的硬碟</p>
+<p>當然也可以下這條指令讓使用者自己選擇映像檔</p>
+<pre><code>poweroff restoredisk ask_user sda
+</code></pre>
+    <h4><a href="https://itpianist.github.io"></a></h4>
+</div>
+
+
+        </div><footer class="container">
+    <hr class="soften">
+    <p>
+
+    <a href="itPianist.github.io">跌跌撞撞且坎坷MIS路</a> | 
+
+&copy; 
+
+    itPianist
+
+<span id="thisyear">2020</span>
+
+
+        |  <a href="//gohugo.io" target="_blank">Hugo</a>
+</p>
+    <p class="text-center">
+        
+        
+        
+        
+        
+    </p>
+</footer>
+
+</body><link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="/css/bootstrap-responsive.css">
+<link rel="stylesheet" href="/css/style.css">
+
+<script src="/js/jquery.js"></script>
+<script src="/js/bootstrap-386.js"></script>
+<script src="/js/bootstrap-transition.js"></script>
+<script src="/js/bootstrap-alert.js"></script>
+<script src="/js/bootstrap-modal.js"></script>
+<script src="/js/bootstrap-dropdown.js"></script>
+<script src="/js/bootstrap-scrollspy.js"></script>
+<script src="/js/bootstrap-tab.js"></script>
+<script src="/js/bootstrap-tooltip.js"></script>
+<script src="/js/bootstrap-popover.js"></script>
+<script src="/js/bootstrap-button.js"></script>
+<script src="/js/bootstrap-collapse.js"></script>
+<script src="/js/bootstrap-carousel.js"></script>
+<script src="/js/bootstrap-typeahead.js"></script>
+<script src="/js/bootstrap-affix.js"></script>
+<script>
+    _386 = { 
+        fastLoad: false ,
+        onePass: false , 
+        speedFactor: 1 
+    };
+
+    
+    function ThisYear() {
+        document.getElementById('thisyear').innerHTML = new Date().getFullYear();
+    };
+</script></html>

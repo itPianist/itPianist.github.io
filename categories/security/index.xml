@@ -6,10 +6,71 @@
     <description>Recent content in Security on IT的不參不肆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
-    <lastBuildDate>Tue, 11 Sep 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 25 May 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://itpianist.github.io/categories/security/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>microsoft store 非管理者可以安裝</title>
+      <link>https://itpianist.github.io/post/post13/</link>
+      <pubDate>Tue, 25 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://itpianist.github.io/post/post13/</guid>
+      <description>關掉方法有兩種，一個是從firewall上上手，不過依照防火牆廠牌不同，Paloalto相較之下好設定許多
+直接將ms-store擋掉就可以了，另外一個就必須要去Active Directory下GPO，直接開啟範本
+將此服務關閉，否則一般使用者可以不透過administrator的權限去安裝軟體
+尤其安裝VPN　這個就會形成漏洞
+Active Directory　GPO設定
+windows10與之前的windows不太一樣的地方
+加入了市集功能(Microsoft Store)
+就以前的習慣，只要把user的權限設定在domain user的權限上
+基本上就能有效限制使用者安裝軟體的問題
+但10導入了Microsoft Store，使用者使用ios手機連接到電腦上
+居然可以強制連結，在防毒軟體的usb裝置限制與AD的限制
+可以透過IOS傳輸數據，只要從Store上安裝apple itunes
+就可以避開一切限制</description>
+    </item>
+    
+    <item>
+      <title>windows SSL憑證轉移至 ubuntu</title>
+      <link>https://itpianist.github.io/post/post11/</link>
+      <pubDate>Wed, 03 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://itpianist.github.io/post/post11/</guid>
+      <description>Chrome Browser 更新至84之後，我司官方網站跳出全頁警告
+因為我司官方網站還是採用TLS 1.0的協定
+畢竟Chrome使用人數相當多，也不能忽視此警告
+於是要求網頁部門著手更新官方網站
+目前舊網站還是架在2008 R2上，並且購買了2+1 SSL憑證
+一來OS過於老舊，二來新官網採用ubuntu 20.04 LTS
+原本想採用Centos 8 但RedHat 在2020年底宣布Centos 8 提前8年終止技術服務
+所以果斷捨棄Centos當Web server，直接選用ubuntu 來使用
+更何況ubuntu LTS　安全維護年限長達十年
+目前能做的就是把2008 R2上的SSL 憑證匯出，只是網路上的資源大多數都是
+windows 轉移到windows 比較少windows 轉移到linux
+先將windows server 2008 r2上的主機憑證匯出來
+這網路上教學不少
+在windows上操作會比較簡單一點
+先準備好匯出的pfx檔案
+利用git這套裡面內建的sslopen來把PKCS12的憑證檔轉換成Apache的格式
+https://git-scm.com/download/win
+git有分setup跟portable
+下載portable版就可以省去安裝的步驟
+下pfx憑證放的位置
+sslopen.exe的路徑在PortableGit\usr\bin
+直接進去bin的路徑，按住Shift+滑鼠右鍵，就可以開啟該目錄的 PowerShell
+輸入
+.\openssl.exe pkcs12 -in D:\TWCA\exportcert.pfx -out D:\TWCA\exportcert.txt -nodes會要求輸入憑證當時設定的密碼
+輸入完成之後，D:\TWCA就會出現exportcert.txt
+這個就是Apache的格式
+建立伺服器私鑰跟伺服器憑證
+檔名分別是server.key跟server.crt
+打開exportcert.txt將裡面的BEGIN PRIVATE KEY跟BEGIN CERTIFICATE分別放入key跟crt
+server.key
+&amp;mdash;&amp;ndash;BEGIN PRIVATE KEY&amp;mdash;&amp;ndash; oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm</description>
+    </item>
     
     <item>
       <title>911中毒事件part1</title>

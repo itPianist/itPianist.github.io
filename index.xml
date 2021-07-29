@@ -6,10 +6,199 @@
     <description>Recent content on IT的不參不肆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
-    <lastBuildDate>Tue, 11 Sep 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 25 May 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://itpianist.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>microsoft store 非管理者可以安裝</title>
+      <link>https://itpianist.github.io/post/post13/</link>
+      <pubDate>Tue, 25 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://itpianist.github.io/post/post13/</guid>
+      <description>關掉方法有兩種，一個是從firewall上上手，不過依照防火牆廠牌不同，Paloalto相較之下好設定許多
+直接將ms-store擋掉就可以了，另外一個就必須要去Active Directory下GPO，直接開啟範本
+將此服務關閉，否則一般使用者可以不透過administrator的權限去安裝軟體
+尤其安裝VPN　這個就會形成漏洞
+Active Directory　GPO設定
+windows10與之前的windows不太一樣的地方
+加入了市集功能(Microsoft Store)
+就以前的習慣，只要把user的權限設定在domain user的權限上
+基本上就能有效限制使用者安裝軟體的問題
+但10導入了Microsoft Store，使用者使用ios手機連接到電腦上
+居然可以強制連結，在防毒軟體的usb裝置限制與AD的限制
+可以透過IOS傳輸數據，只要從Store上安裝apple itunes
+就可以避開一切限制</description>
+    </item>
+    
+    <item>
+      <title>利用clonezilla來取代ghost來製作一鍵還原隨身碟</title>
+      <link>https://itpianist.github.io/post/post12/</link>
+      <pubDate>Wed, 12 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://itpianist.github.io/post/post12/</guid>
+      <description>最近朋友接到一個案子，LED控制跑馬燈的主機
+因為去年被駭的資安問題，所以工控電腦要重新安裝系統
+也因為資安問題，不能使用無授權或者是有資安疑慮的ghost
+所以利用國網中心開發的Clonezilla 再生龍來製作一鍵還原
+以我先前製作營業單位的POS機的還原隨身碟的範例來示範
+由於不知道工控主機是用MBR或UEFI的機器開機
+因為兩者修改的檔案是不一樣的
+在MBR為主的主機上，Clonezilla 修改的檔案是
+/syslinux/syslinux.cfg
+在uEFI為主機的主機上，Clonezilla 修改的檔案是
+/boot/grub/grub.cfg
+兩者寫法稍微不同，不過下的指令是相同的
+先準備好一張圖片，取代掉/syslinux/ocswp.png 像素為640x480
+像素太高的話，開機畫面會整個糊掉
+編輯syslinux.cfg該檔案
+ simple menu title MENU TITLE
+ clonezilla.org, clonezilla.nchc.org.tw
+這個可以修改你要的標題
+通常我都會把MENU DEFAULT的預設Clonezilla live留下來
+以防後續操作人員操作失當或要使用Clonezilla 做backup 可以用上
+label test bbbMENU DEFAULT# MENU HIDEMENU LABEL Supermarket POS 002# MENU PASSWDSupermarket POS 002 開機選單呈現出來的畫面
+kernel /live/vmlinuzappend initrd=/live/initrd.img boot=live hostname=maverick config noswap locales=zh_TW.UTF-8 keyboard-layouts=us edd=on nomodeset noprompt ocs_prerun1=&amp;quot;mount /dev/sdb2 /mnt/&amp;quot; ocs_prerun2=&amp;quot;mount --bind /mnt/Backup /home/partimag/&amp;quot; ocs_live_run=&amp;quot;ocs-live-restore&amp;quot; ocs_live_extra_param=&amp;quot;-g auto -e1 auto -scr -c -e2 -j2 -p poweroff restoredisk 2021-05-03-11_pos001-img sda&amp;quot; ocs_live_keymap=&amp;quot;NONE&amp;quot; ocs_live_batch=&amp;quot;yes&amp;quot; ocs_lang=&amp;quot;zh_TW.</description>
+    </item>
+    
+    <item>
+      <title>windows SSL憑證轉移至 ubuntu</title>
+      <link>https://itpianist.github.io/post/post11/</link>
+      <pubDate>Wed, 03 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://itpianist.github.io/post/post11/</guid>
+      <description>Chrome Browser 更新至84之後，我司官方網站跳出全頁警告
+因為我司官方網站還是採用TLS 1.0的協定
+畢竟Chrome使用人數相當多，也不能忽視此警告
+於是要求網頁部門著手更新官方網站
+目前舊網站還是架在2008 R2上，並且購買了2+1 SSL憑證
+一來OS過於老舊，二來新官網採用ubuntu 20.04 LTS
+原本想採用Centos 8 但RedHat 在2020年底宣布Centos 8 提前8年終止技術服務
+所以果斷捨棄Centos當Web server，直接選用ubuntu 來使用
+更何況ubuntu LTS　安全維護年限長達十年
+目前能做的就是把2008 R2上的SSL 憑證匯出，只是網路上的資源大多數都是
+windows 轉移到windows 比較少windows 轉移到linux
+先將windows server 2008 r2上的主機憑證匯出來
+這網路上教學不少
+在windows上操作會比較簡單一點
+先準備好匯出的pfx檔案
+利用git這套裡面內建的sslopen來把PKCS12的憑證檔轉換成Apache的格式
+https://git-scm.com/download/win
+git有分setup跟portable
+下載portable版就可以省去安裝的步驟
+下pfx憑證放的位置
+sslopen.exe的路徑在PortableGit\usr\bin
+直接進去bin的路徑，按住Shift+滑鼠右鍵，就可以開啟該目錄的 PowerShell
+輸入
+.\openssl.exe pkcs12 -in D:\TWCA\exportcert.pfx -out D:\TWCA\exportcert.txt -nodes會要求輸入憑證當時設定的密碼
+輸入完成之後，D:\TWCA就會出現exportcert.txt
+這個就是Apache的格式
+建立伺服器私鑰跟伺服器憑證
+檔名分別是server.key跟server.crt
+打開exportcert.txt將裡面的BEGIN PRIVATE KEY跟BEGIN CERTIFICATE分別放入key跟crt
+server.key
+&amp;mdash;&amp;ndash;BEGIN PRIVATE KEY&amp;mdash;&amp;ndash; oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm</description>
+    </item>
+    
+    <item>
+      <title>office 2016/2019盒裝版與大量授權版</title>
+      <link>https://itpianist.github.io/post/post10/</link>
+      <pubDate>Mon, 04 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://itpianist.github.io/post/post10/</guid>
+      <description>早期公司買了一堆盒裝版，大量授權版跟盒裝版的差異比較明顯的有幾點
+1.彩盒版裡頭禮物卡必須上微軟註冊開通，開通完畢之後會給一組序號
+然後必須去下載HomeBusiness來安裝，每個office帳號僅能註冊三十組
+2.電腦安裝啟用序號之後 ，該電腦不能做任何重灌或者更換主機板，因為綁定90天移機限制
+3.移機啟用序號有限制，但目前公開網頁上都沒有明講，有人說是五次，有人說是日期內限制</description>
+    </item>
+    
+    <item>
+      <title>利用fastcopy搭配ftp script來做自動化排程</title>
+      <link>https://itpianist.github.io/post/post6/</link>
+      <pubDate>Fri, 11 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://itpianist.github.io/post/post6/</guid>
+      <description>近期公司增加停車管理系統，以前都是採人工停車收費，換停管系統之後
+後續處理開立發票事宜，已經從二聯式換成電子發票了
+只是廠商提供發票產出而已，後續發票上傳就由我司這邊做
+只是他們只提供從FTP下載而已
+利用OS提供的基本FTP來做檔案下載，再利用Fastcopy來達成發票分類
+先寫ftp登入的script 開啟notepad
+ftpuser //ftp帳號ftppassword //ftp密碼binary //二進位制上傳或ASCII傳輸模式 *依檔案內容需求做調整prompt off //互動模式關閉lcd C:\xml //設定本機放發票的資料夾cd /C0401 //設定FTP所在資料夾 *依FTP server設定產出的資料夾mget *.xml //下載該資料夾下的所有xml檔案cd /C0501 //設定FTP所在資料夾 *依FTP server設定產出的資料夾mget *.xml //下載該資料夾下的所有xml檔案//以上依需求設定儲存之後命名為ftp.log *依需求去做命名
+如果產出的目錄簡單，其實從FTP直接下載到Tunkey也是可以
+把lcd路徑改成Tunkey放C0401就能直接從ftp下載
+因為要留下LOG檔來確定FTP上的發票數量正不正確跟有無傳輸成功
+另外留下備份需求，所以才會多一個步驟來做
+建立批次檔
+@echo offftp -v -s:D:\ftp.log 192.168.100.1 \\開啟ftp.log script執行ftp下載C:\test\fastcopy\fastcopy.exe /cmd=diff /auto_close /estimate /logfile=&amp;quot;C:\XML\xml_log.log&amp;quot; /include=&amp;quot;C0401*.xml&amp;quot; &amp;quot;C:\XML&amp;quot; /to=&amp;quot;c:\EINVTurnkey\Upcast\B2CSTORAGE\C0401\SRC&amp;quot;以上改成C0401改成C0501
+就可以將檔案依照C0501開頭丟進相應的上傳資料夾
+這邊需要注意的事情就是，如果利用微軟FTP來做下載，會依當下啟動的時間來定義檔案時間戳記
+除非用FileZilla、NCFTP等第三方軟體，才有可能保留時間戳記，否則利用fastcopy的/from_date
+否則用時間去做判斷下載的作用不大</description>
+    </item>
+    
+    <item>
+      <title>將ad使用整合paloalto防火牆上</title>
+      <link>https://itpianist.github.io/post/post7/</link>
+      <pubDate>Mon, 20 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://itpianist.github.io/post/post7/</guid>
+      <description>Palo alto 的官方說明如下
+User-ID: Tie users and groups to your security policies User-ID seamlessly integrates Palo Alto Networks next-generation firewalls with a wide range of user repositories and terminal services environments. Depending on your network environment, there are a variety of ways you can map a user’s identity to an IP address. Some of these include:
+ Authentication events User authentication Terminal services monitoring Client probing Directory services integration A powerful XML API  在數百台電腦上發現其中一台電腦有異常，也能迅速辨別是那一部門、那台電腦</description>
+    </item>
+    
+    <item>
+      <title>新建置的Synology、HDD出現了損毀</title>
+      <link>https://itpianist.github.io/post/post8/</link>
+      <pubDate>Sat, 14 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://itpianist.github.io/post/post8/</guid>
+      <description>建置沒多久的Synology　RS2418RP+
+早上發出短蜂鳴聲，進去看之後發現了
+一顆HDD發出損壞警告，緊急拆下來之後，原本想要送修
+先拆另外一台RS2418RP+備機上的HDD來使用
+過沒多久還是跳出警告，只好開case
+過沒多久原廠給了回覆，回覆如下
+根據判斷，此原因為已知的問題，雖然您所使用的硬碟為相容清單的硬碟（ST8000NM000A-2KE101），但是其frimware 是SN01並不是清單列表上的SN02 [1]，目前已知使用在該款硬碟使用FW：SN01 的確會造成硬碟回應過導致系統將該硬碟踢出儲存集區(請參考下方log[2])。所以要解決此問題有兩種方式，第一個為停用硬碟的 write cache, 但是可能會造成寫入效能問題，第二種作法為請您聯絡硬碟廠商將FW更新到SN02來避免此問題。依照原廠的規定購買此相容清單上的硬碟，但frimware版本不符合，導致回應過度
+再來因為寫入速度問題，都會將write cache打開，如果不打開也許不會發生這次事件
+就只能更新frimware版本了</description>
+    </item>
+    
+    <item>
+      <title>利用clonezilla完成電腦大量部屬</title>
+      <link>https://itpianist.github.io/post/post9/</link>
+      <pubDate>Thu, 20 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://itpianist.github.io/post/post9/</guid>
+      <description>911中毒事件之後，公司確定要全面將XP電腦汰換掉，目前無法升級或過於老舊
+的電腦不下七十台，往年的做法就是拿硬碟座HDD Clone HDD
+但會遇到SSID的問題，另外只能一台一台拆下硬碟，再來品牌電腦HDD跟保固綁在一起
+如果HDD拆下裝上亂掉之後，送修可能就會有問題。
+所以架再生龍來大量部屬
+可以參考國網提供的教學
+http://clonezilla.nchc.org.tw/clonezilla-live/bt-from-disk/
+步驟如連結上的一樣
+這邊提供遇到的問題
+一、盡量用比較高等級的switch 去做大量部屬
+如果是用低階的switch ，同樣用23 Port 去Multicast效率很明顯
+例如使用D-link 1024G 的設備與使用HPE 1920S 24G
+兩者差了兩個小時以上
+D-link 1024G 兩個半小時完成23台的部屬
+HPE 1920S 24G 半個小時就完成了23台的部屬
+二、如果同型號只是CPU等級不同，建議CPU較高的來做主機，這樣效率也會比較高一點
+三、建議要做部屬的電腦開機啟動使用legacy為主，使用uefi失敗率頗高，常在開機XPE接收DHCP
+時就無法接收到主機的分配IP，當然也無法繼續下一步
+四、Clonezilla最大一次部屬是100台，假設今天要部屬的是75台，請不要輸入75台，直接輸入100台
+派送失敗也算一台。
+五、要一次做一百台派送也沒問題，如果場地跟電源、網路線還有switch都允許的話
+我一個人50台電腦四個小時完成，包括拆箱、BIOS設定XPE，通常前面是最花時間的
+(24Port switch 拆箱開機設定BIOS Clonezilla設定完成電腦關機→完成後裝箱 )
+六、如果是長期需要做固定還原的需求，建議是架設DRBL Server 如果有DRBL 台數基本上可以超過一百台</description>
+    </item>
     
     <item>
       <title></title>
@@ -129,7 +318,7 @@ del /S C:\test\*.xml
 定義為Z槽
 net use Z:\\\192.168.1.1\pos\EINVOICE_XML\ /user:帳號　密碼
 只是我把2018資料夾給拿掉，fastcopy加一行時間函數，跨年就不用去改掛載資料夾
-C:\test\FastCopy\FastCopy.exe /cmd=diff /to_date=&amp;quot;+12h&amp;quot; /auto_close /estimate /logfile=&amp;quot;C:\test\fastcopy.txt&amp;quot; /include=&amp;quot;*.xml&amp;quot; &amp;quot;Z:\&amp;quot; /to=&amp;quot;C:\einvt_xml&amp;quot;
+C:\test\FastCopy\FastCopy.exe /cmd=diff /for_date=&amp;quot;+12h&amp;quot; /auto_close /estimate /logfile=&amp;quot;C:\test\fastcopy.txt&amp;quot; /include=&amp;quot;*.xml&amp;quot; &amp;quot;Z:\&amp;quot; /to=&amp;quot;C:\einvt_xml&amp;quot;
 注意一點的是Fastcopy的執行檔要指定，如果指定錯誤位置，fastcopy會沒作用
   /cmd=diff
 diff這指令是複製指令，也可以用move指令，因為要留一份在pos主機上

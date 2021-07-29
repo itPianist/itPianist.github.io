@@ -6,10 +6,55 @@
     <description>Recent content in Categories on IT的不參不肆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
-    <lastBuildDate>Tue, 11 Sep 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 25 May 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://itpianist.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Security</title>
+      <link>https://itpianist.github.io/categories/security/</link>
+      <pubDate>Tue, 25 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://itpianist.github.io/categories/security/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Clonezilla</title>
+      <link>https://itpianist.github.io/categories/clonezilla/</link>
+      <pubDate>Wed, 12 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://itpianist.github.io/categories/clonezilla/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>fastcopy</title>
+      <link>https://itpianist.github.io/categories/fastcopy/</link>
+      <pubDate>Fri, 11 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://itpianist.github.io/categories/fastcopy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>palo alto</title>
+      <link>https://itpianist.github.io/categories/palo-alto/</link>
+      <pubDate>Mon, 20 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://itpianist.github.io/categories/palo-alto/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>server</title>
+      <link>https://itpianist.github.io/categories/server/</link>
+      <pubDate>Sat, 14 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://itpianist.github.io/categories/server/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>paloalto</title>
@@ -21,29 +66,11 @@
     </item>
     
     <item>
-      <title>Security</title>
-      <link>https://itpianist.github.io/categories/security/</link>
-      <pubDate>Tue, 11 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://itpianist.github.io/categories/security/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>virus</title>
       <link>https://itpianist.github.io/categories/virus/</link>
       <pubDate>Tue, 11 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>https://itpianist.github.io/categories/virus/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>fastcopy</title>
-      <link>https://itpianist.github.io/categories/fastcopy/</link>
-      <pubDate>Mon, 12 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://itpianist.github.io/categories/fastcopy/</guid>
       <description></description>
     </item>
     

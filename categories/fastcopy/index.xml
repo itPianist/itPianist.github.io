@@ -6,10 +6,35 @@
     <description>Recent content in fastcopy on IT的不參不肆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
-    <lastBuildDate>Mon, 12 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 11 Dec 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://itpianist.github.io/categories/fastcopy/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>利用fastcopy搭配ftp script來做自動化排程</title>
+      <link>https://itpianist.github.io/post/post6/</link>
+      <pubDate>Fri, 11 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://itpianist.github.io/post/post6/</guid>
+      <description>近期公司增加停車管理系統，以前都是採人工停車收費，換停管系統之後
+後續處理開立發票事宜，已經從二聯式換成電子發票了
+只是廠商提供發票產出而已，後續發票上傳就由我司這邊做
+只是他們只提供從FTP下載而已
+利用OS提供的基本FTP來做檔案下載，再利用Fastcopy來達成發票分類
+先寫ftp登入的script 開啟notepad
+ftpuser //ftp帳號ftppassword //ftp密碼binary //二進位制上傳或ASCII傳輸模式 *依檔案內容需求做調整prompt off //互動模式關閉lcd C:\xml //設定本機放發票的資料夾cd /C0401 //設定FTP所在資料夾 *依FTP server設定產出的資料夾mget *.xml //下載該資料夾下的所有xml檔案cd /C0501 //設定FTP所在資料夾 *依FTP server設定產出的資料夾mget *.xml //下載該資料夾下的所有xml檔案//以上依需求設定儲存之後命名為ftp.log *依需求去做命名
+如果產出的目錄簡單，其實從FTP直接下載到Tunkey也是可以
+把lcd路徑改成Tunkey放C0401就能直接從ftp下載
+因為要留下LOG檔來確定FTP上的發票數量正不正確跟有無傳輸成功
+另外留下備份需求，所以才會多一個步驟來做
+建立批次檔
+@echo offftp -v -s:D:\ftp.log 192.168.100.1 \\開啟ftp.log script執行ftp下載C:\test\fastcopy\fastcopy.exe /cmd=diff /auto_close /estimate /logfile=&amp;quot;C:\XML\xml_log.log&amp;quot; /include=&amp;quot;C0401*.xml&amp;quot; &amp;quot;C:\XML&amp;quot; /to=&amp;quot;c:\EINVTurnkey\Upcast\B2CSTORAGE\C0401\SRC&amp;quot;以上改成C0401改成C0501
+就可以將檔案依照C0501開頭丟進相應的上傳資料夾
+這邊需要注意的事情就是，如果利用微軟FTP來做下載，會依當下啟動的時間來定義檔案時間戳記
+除非用FileZilla、NCFTP等第三方軟體，才有可能保留時間戳記，否則利用fastcopy的/from_date
+否則用時間去做判斷下載的作用不大</description>
+    </item>
     
     <item>
       <title>電子發票上傳失敗 Part2</title>
@@ -22,7 +47,7 @@
 定義為Z槽
 net use Z:\\\192.168.1.1\pos\EINVOICE_XML\ /user:帳號　密碼
 只是我把2018資料夾給拿掉，fastcopy加一行時間函數，跨年就不用去改掛載資料夾
-C:\test\FastCopy\FastCopy.exe /cmd=diff /to_date=&amp;quot;+12h&amp;quot; /auto_close /estimate /logfile=&amp;quot;C:\test\fastcopy.txt&amp;quot; /include=&amp;quot;*.xml&amp;quot; &amp;quot;Z:\&amp;quot; /to=&amp;quot;C:\einvt_xml&amp;quot;
+C:\test\FastCopy\FastCopy.exe /cmd=diff /for_date=&amp;quot;+12h&amp;quot; /auto_close /estimate /logfile=&amp;quot;C:\test\fastcopy.txt&amp;quot; /include=&amp;quot;*.xml&amp;quot; &amp;quot;Z:\&amp;quot; /to=&amp;quot;C:\einvt_xml&amp;quot;
 注意一點的是Fastcopy的執行檔要指定，如果指定錯誤位置，fastcopy會沒作用
   /cmd=diff
 diff這指令是複製指令，也可以用move指令，因為要留一份在pos主機上

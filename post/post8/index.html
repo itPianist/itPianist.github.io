@@ -44,37 +44,29 @@
         </div>
     </div>
 </nav><div id="content" class="container">
-<article class="row-fluid navmargin">
-    <header class="page-header">
-        <h1>Tags</h1>
-    </header>
-    
-    
-</article>
-<ul>
 
+<div class="row-fluid navmargin">
+    <div class="page-header">
+        <h1>新建置的Synology、HDD出現了損毀 - Sat, Mar 14, 2020</h1>
+    </div>
+    <p class="lead">購買不到兩個月的NAS，相繼出現硬碟損毀的警告訊息</p>
+    <p><img src="/img/8-1.jpg" alt=""></p>
+<p><img src="/img/8-2.jpg" alt=""></p>
+<p><img src="/img/8-3.jpg" alt=""></p>
+<p>建置沒多久的Synology　RS2418RP+</p>
+<p>早上發出短蜂鳴聲，進去看之後發現了</p>
+<p>一顆HDD發出損壞警告，緊急拆下來之後，原本想要送修</p>
+<p>先拆另外一台RS2418RP+備機上的HDD來使用</p>
+<p>過沒多久還是跳出警告，只好開case</p>
+<p>過沒多久原廠給了回覆，回覆如下</p>
+<pre><code>根據判斷，此原因為已知的問題，雖然您所使用的硬碟為相容清單的硬碟（ST8000NM000A-2KE101），但是其frimware 是SN01並不是清單列表上的SN02 [1]，目前已知使用在該款硬碟使用FW：SN01 的確會造成硬碟回應過導致系統將該硬碟踢出儲存集區(請參考下方log[2])。所以要解決此問題有兩種方式，第一個為停用硬碟的 write cache, 但是可能會造成寫入效能問題，第二種作法為請您聯絡硬碟廠商將FW更新到SN02來避免此問題。
+</code></pre><p>依照原廠的規定購買此相容清單上的硬碟，但frimware版本不符合，導致回應過度</p>
+<p>再來因為寫入速度問題，都會將write cache打開，如果不打開也許不會發生這次事件</p>
+<p>就只能更新frimware版本了</p>
 
-    <li>
-        <a href="https://itpianist.github.io/tags/ubuntu/">2021-03-03 | ubuntu</a>
-    </li>
+    <h4><a href="https://itpianist.github.io"></a></h4>
+</div>
 
-    <li>
-        <a href="https://itpianist.github.io/tags/server/">2020-12-11 | Server</a>
-    </li>
-
-    <li>
-        <a href="https://itpianist.github.io/tags/synology/">2020-03-14 | Synology</a>
-    </li>
-
-    <li>
-        <a href="https://itpianist.github.io/tags/clonezilla/">2020-02-20 | clonezilla</a>
-    </li>
-
-    <li>
-        <a href="https://itpianist.github.io/tags/%E8%B3%87%E5%AE%89%E4%BA%8B%E4%BB%B6/">2018-09-11 | 資安事件</a>
-    </li>
-
-</ul>
 
         </div><footer class="container">
     <hr class="soften">

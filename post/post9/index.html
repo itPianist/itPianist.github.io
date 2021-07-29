@@ -44,37 +44,40 @@
         </div>
     </div>
 </nav><div id="content" class="container">
-<article class="row-fluid navmargin">
-    <header class="page-header">
-        <h1>Tags</h1>
-    </header>
-    
-    
-</article>
-<ul>
 
+<div class="row-fluid navmargin">
+    <div class="page-header">
+        <h1>利用clonezilla完成電腦大量部屬 - Thu, Feb 20, 2020</h1>
+    </div>
+    <p class="lead">由於電腦老舊，導致資安事件，於是公司大量購買一批電腦進來</p>
+    <p>911中毒事件之後，公司確定要全面將XP電腦汰換掉，目前無法升級或過於老舊</p>
+<p>的電腦不下七十台，往年的做法就是拿硬碟座HDD Clone HDD</p>
+<p>但會遇到SSID的問題，另外只能一台一台拆下硬碟，再來品牌電腦HDD跟保固綁在一起</p>
+<p>如果HDD拆下裝上亂掉之後，送修可能就會有問題。</p>
+<p>所以架再生龍來大量部屬</p>
+<p>可以參考國網提供的教學</p>
+<p><a href="http://clonezilla.nchc.org.tw/clonezilla-live/bt-from-disk/">http://clonezilla.nchc.org.tw/clonezilla-live/bt-from-disk/</a></p>
+<p>步驟如連結上的一樣</p>
+<p>這邊提供遇到的問題</p>
+<p>一、盡量用比較高等級的switch 去做大量部屬</p>
+<p>如果是用低階的switch ，同樣用23 Port 去Multicast效率很明顯</p>
+<p>例如使用D-link 1024G 的設備與使用HPE 1920S 24G</p>
+<p>兩者差了兩個小時以上</p>
+<p>D-link 1024G 兩個半小時完成23台的部屬</p>
+<p>HPE 1920S 24G 半個小時就完成了23台的部屬</p>
+<p>二、如果同型號只是CPU等級不同，建議CPU較高的來做主機，這樣效率也會比較高一點</p>
+<p>三、建議要做部屬的電腦開機啟動使用legacy為主，使用uefi失敗率頗高，常在開機XPE接收DHCP</p>
+<p>時就無法接收到主機的分配IP，當然也無法繼續下一步</p>
+<p>四、Clonezilla最大一次部屬是100台，假設今天要部屬的是75台，請不要輸入75台，直接輸入100台</p>
+<p>派送失敗也算一台。</p>
+<p>五、要一次做一百台派送也沒問題，如果場地跟電源、網路線還有switch都允許的話</p>
+<p>我一個人50台電腦四個小時完成，包括拆箱、BIOS設定XPE，通常前面是最花時間的</p>
+<p>(24Port switch 拆箱開機設定BIOS Clonezilla設定完成電腦關機→完成後裝箱 )</p>
+<p>六、如果是長期需要做固定還原的需求，建議是架設DRBL Server 如果有DRBL 台數基本上可以超過一百台</p>
 
-    <li>
-        <a href="https://itpianist.github.io/tags/ubuntu/">2021-03-03 | ubuntu</a>
-    </li>
+    <h4><a href="https://itpianist.github.io"></a></h4>
+</div>
 
-    <li>
-        <a href="https://itpianist.github.io/tags/server/">2020-12-11 | Server</a>
-    </li>
-
-    <li>
-        <a href="https://itpianist.github.io/tags/synology/">2020-03-14 | Synology</a>
-    </li>
-
-    <li>
-        <a href="https://itpianist.github.io/tags/clonezilla/">2020-02-20 | clonezilla</a>
-    </li>
-
-    <li>
-        <a href="https://itpianist.github.io/tags/%E8%B3%87%E5%AE%89%E4%BA%8B%E4%BB%B6/">2018-09-11 | 資安事件</a>
-    </li>
-
-</ul>
 
         </div><footer class="container">
     <hr class="soften">

@@ -44,37 +44,52 @@
         </div>
     </div>
 </nav><div id="content" class="container">
-<article class="row-fluid navmargin">
-    <header class="page-header">
-        <h1>Tags</h1>
-    </header>
-    
-    
-</article>
+
+<div class="row-fluid navmargin">
+    <div class="page-header">
+        <h1>將ad使用整合paloalto防火牆上 - Mon, Jul 20, 2020</h1>
+    </div>
+    <p class="lead">將ad使用者加入palo alto，利用palo alto User ID達成控管目的</p>
+    <p>Palo alto 的官方說明如下</p>
+<h2 id="user-id-tie-users-and-groups-to-your-security-policies"><strong>User-ID:</strong> Tie users and groups to your security policies</h2>
+<p>User-ID seamlessly integrates Palo Alto Networks next-generation firewalls with a wide range of user repositories and terminal services environments. Depending on your network environment, there are a variety of ways you can map a user’s identity to an IP address. Some of these include:</p>
 <ul>
-
-
-    <li>
-        <a href="https://itpianist.github.io/tags/ubuntu/">2021-03-03 | ubuntu</a>
-    </li>
-
-    <li>
-        <a href="https://itpianist.github.io/tags/server/">2020-12-11 | Server</a>
-    </li>
-
-    <li>
-        <a href="https://itpianist.github.io/tags/synology/">2020-03-14 | Synology</a>
-    </li>
-
-    <li>
-        <a href="https://itpianist.github.io/tags/clonezilla/">2020-02-20 | clonezilla</a>
-    </li>
-
-    <li>
-        <a href="https://itpianist.github.io/tags/%E8%B3%87%E5%AE%89%E4%BA%8B%E4%BB%B6/">2018-09-11 | 資安事件</a>
-    </li>
-
+<li>Authentication events</li>
+<li>User authentication</li>
+<li>Terminal services monitoring</li>
+<li>Client probing</li>
+<li>Directory services integration</li>
+<li>A powerful XML API</li>
 </ul>
+<p>在數百台電腦上發現其中一台電腦有異常，也能迅速辨別是那一部門、那台電腦</p>
+<p>就上次的911資安事件之後，也要花一段時間來找案發電腦，若未做好電腦歸屬</p>
+<p>幾百台的電腦找出來要花不少時間</p>
+<p>也能減少管理者的負擔，就算只用來Monitor也有此效用</p>
+<p>早些版本的PA，是利用agent部屬到其中一台加入網域的電腦來取用Domain User</p>
+<p>圖10</p>
+<p>缺點就是占用的資料量頗高，若該電腦故障，就無法擷取Domain User</p>
+<p>圖11</p>
+<p>現在直接連到Domain Controller  是官方比較推薦的方法</p>
+<p>設定方法如下</p>
+<p>Device→User identification→User Mapping</p>
+<p>先將Server Monitoring 建立起來</p>
+<p>確定AD server位址建立之後，再來去AD上建立Palo alto帳號</p>
+<p>當然也可以使用administrator，但建議不要使用管理者帳號給Palo alto</p>
+<p>免得有資安漏洞時遭利用</p>
+<p><a href="https://docs.paloaltonetworks.com/pan-os/10-0/pan-os-admin/user-id/map-ip-addresses-to-users/create-a-dedicated-service-account-for-the-user-id-agent.html">https://docs.paloaltonetworks.com/pan-os/10-0/pan-os-admin/user-id/map-ip-addresses-to-users/create-a-dedicated-service-account-for-the-user-id-agent.html</a></p>
+<p>在AD帳號建立user的權限，官方文件建議</p>
+<p>開放兩個權限就可以讓Domain Controller跟PA互相溝通</p>
+<p>Event log Readers 及server Operators</p>
+<p>實際上開放這兩權限還是無法從Domain Controller抓取user ID</p>
+<p>必須要開放Domain Admins</p>
+<p>最後到Palo Alto Networks User-ID Agent Setup→server Monitor Account 上輸入</p>
+<p>剛在AD上建立的使用者</p>
+<p>只要出現Connected表示設定成功了</p>
+<p>進去Monitor 就能看到使用者的連線</p>
+
+    <h4><a href="https://itpianist.github.io"></a></h4>
+</div>
+
 
         </div><footer class="container">
     <hr class="soften">

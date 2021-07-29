@@ -55,7 +55,7 @@
 <p>定義為Z槽</p>
 <p><code>net use Z:\\\192.168.1.1\pos\EINVOICE_XML\ /user:帳號　密碼</code></p>
 <p>只是我把2018資料夾給拿掉，fastcopy加一行時間函數，跨年就不用去改掛載資料夾</p>
-<p><code>C:\test\FastCopy\FastCopy.exe /cmd=diff /to_date=&quot;+12h&quot; /auto_close /estimate /logfile=&quot;C:\test\fastcopy.txt&quot; /include=&quot;*.xml&quot; &quot;Z:\&quot; /to=&quot;C:\einvt_xml&quot;</code></p>
+<p><code>C:\test\FastCopy\FastCopy.exe /cmd=diff /for_date=&quot;+12h&quot; /auto_close /estimate /logfile=&quot;C:\test\fastcopy.txt&quot; /include=&quot;*.xml&quot; &quot;Z:\&quot; /to=&quot;C:\einvt_xml&quot;</code></p>
 <p>注意一點的是Fastcopy的執行檔要指定，如果指定錯誤位置，fastcopy會沒作用</p>
 <ol>
 <li>

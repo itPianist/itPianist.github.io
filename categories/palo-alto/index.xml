@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>palo alto on IT的不參不肆</title>
+    <link>https://itpianist.github.io/categories/palo-alto/</link>
+    <description>Recent content in palo alto on IT的不參不肆</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Mon, 20 Jul 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://itpianist.github.io/categories/palo-alto/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>將ad使用整合paloalto防火牆上</title>
+      <link>https://itpianist.github.io/post/post7/</link>
+      <pubDate>Mon, 20 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://itpianist.github.io/post/post7/</guid>
+      <description>Palo alto 的官方說明如下
+User-ID: Tie users and groups to your security policies User-ID seamlessly integrates Palo Alto Networks next-generation firewalls with a wide range of user repositories and terminal services environments. Depending on your network environment, there are a variety of ways you can map a user’s identity to an IP address. Some of these include:
+ Authentication events User authentication Terminal services monitoring Client probing Directory services integration A powerful XML API  在數百台電腦上發現其中一台電腦有異常，也能迅速辨別是那一部門、那台電腦</description>
+    </item>
+    
+  </channel>
+</rss>
