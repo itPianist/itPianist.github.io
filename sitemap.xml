@@ -28,18 +28,18 @@
   </url>
   
   <url>
-    <loc>https://itpianist.github.io/categories/clonezilla/</loc>
+    <loc>https://itpianist.github.io/tags/clonezilla/</loc>
+    <lastmod>2021-05-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://itpianist.github.io/tags/</loc>
     <lastmod>2021-05-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://itpianist.github.io/post/post12/</loc>
     <lastmod>2021-05-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://itpianist.github.io/tags/</loc>
-    <lastmod>2021-03-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -58,12 +58,12 @@
   </url>
   
   <url>
-    <loc>https://itpianist.github.io/categories/fastcopy/</loc>
+    <loc>https://itpianist.github.io/tags/fastcopy/</loc>
     <lastmod>2020-12-11T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://itpianist.github.io/tags/server/</loc>
+    <loc>https://itpianist.github.io/categories/server/</loc>
     <lastmod>2020-12-11T00:00:00+00:00</lastmod>
   </url>
   
@@ -73,18 +73,13 @@
   </url>
   
   <url>
-    <loc>https://itpianist.github.io/categories/palo-alto/</loc>
+    <loc>https://itpianist.github.io/tags/palo-alto/</loc>
     <lastmod>2020-07-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://itpianist.github.io/post/post7/</loc>
     <lastmod>2020-07-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://itpianist.github.io/categories/server/</loc>
-    <lastmod>2020-03-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -98,11 +93,6 @@
   </url>
   
   <url>
-    <loc>https://itpianist.github.io/tags/clonezilla/</loc>
-    <lastmod>2020-02-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://itpianist.github.io/post/post9/</loc>
     <lastmod>2020-02-20T00:00:00+00:00</lastmod>
   </url>
@@ -110,6 +100,11 @@
   <url>
     <loc>https://itpianist.github.io/archives/</loc>
     <lastmod>2019-05-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://itpianist.github.io/post/post14/</loc>
+    <lastmod>2018-10-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -128,27 +123,7 @@
   </url>
   
   <url>
-    <loc>https://itpianist.github.io/categories/paloalto/</loc>
-    <lastmod>2018-09-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://itpianist.github.io/categories/virus/</loc>
-    <lastmod>2018-09-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://itpianist.github.io/tags/%E8%B3%87%E5%AE%89%E4%BA%8B%E4%BB%B6/</loc>
-    <lastmod>2018-09-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://itpianist.github.io/categories/robocopy/</loc>
-    <lastmod>2018-03-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://itpianist.github.io/categories/tunkey/</loc>
+    <loc>https://itpianist.github.io/tags/robocopy/</loc>
     <lastmod>2018-03-12T00:00:00+00:00</lastmod>
   </url>
   

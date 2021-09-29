@@ -1,15 +1,45 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>clonezilla on IT的不參不肆</title>
+    <title>Clonezilla on IT的不參不肆</title>
     <link>https://itpianist.github.io/tags/clonezilla/</link>
-    <description>Recent content in clonezilla on IT的不參不肆</description>
+    <description>Recent content in Clonezilla on IT的不參不肆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
-    <lastBuildDate>Thu, 20 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 12 May 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://itpianist.github.io/tags/clonezilla/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>利用clonezilla來取代ghost來製作一鍵還原隨身碟</title>
+      <link>https://itpianist.github.io/post/post12/</link>
+      <pubDate>Wed, 12 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://itpianist.github.io/post/post12/</guid>
+      <description>最近朋友接到一個案子，LED控制跑馬燈的主機
+因為去年被駭的資安問題，所以工控電腦要重新安裝系統
+也因為資安問題，不能使用無授權或者是有資安疑慮的ghost
+所以利用國網中心開發的Clonezilla 再生龍來製作一鍵還原
+以我先前製作營業單位的POS機的還原隨身碟的範例來示範
+由於不知道工控主機是用MBR或UEFI的機器開機
+因為兩者修改的檔案是不一樣的
+在MBR為主的主機上，Clonezilla 修改的檔案是
+/syslinux/syslinux.cfg
+在uEFI為主機的主機上，Clonezilla 修改的檔案是
+/boot/grub/grub.cfg
+兩者寫法稍微不同，不過下的指令是相同的
+先準備好一張圖片，取代掉/syslinux/ocswp.png 像素為640x480
+像素太高的話，開機畫面會整個糊掉
+編輯syslinux.cfg該檔案
+ simple menu title MENU TITLE
+ clonezilla.org, clonezilla.nchc.org.tw
+這個可以修改你要的標題
+通常我都會把MENU DEFAULT的預設Clonezilla live留下來
+以防後續操作人員操作失當或要使用Clonezilla 做backup 可以用上
+label test bbbMENU DEFAULT# MENU HIDEMENU LABEL Supermarket POS 002# MENU PASSWDSupermarket POS 002 開機選單呈現出來的畫面
+kernel /live/vmlinuzappend initrd=/live/initrd.img boot=live hostname=maverick config noswap locales=zh_TW.UTF-8 keyboard-layouts=us edd=on nomodeset noprompt ocs_prerun1=&amp;quot;mount /dev/sdb2 /mnt/&amp;quot; ocs_prerun2=&amp;quot;mount --bind /mnt/Backup /home/partimag/&amp;quot; ocs_live_run=&amp;quot;ocs-live-restore&amp;quot; ocs_live_extra_param=&amp;quot;-g auto -e1 auto -scr -c -e2 -j2 -p poweroff restoredisk 2021-05-03-11_pos001-img sda&amp;quot; ocs_live_keymap=&amp;quot;NONE&amp;quot; ocs_live_batch=&amp;quot;yes&amp;quot; ocs_lang=&amp;quot;zh_TW.</description>
+    </item>
     
     <item>
       <title>利用clonezilla完成電腦大量部屬</title>

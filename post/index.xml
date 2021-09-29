@@ -201,6 +201,27 @@ HPE 1920S 24G 半個小時就完成了23台的部屬
     </item>
     
     <item>
+      <title>microsoft store 非管理者可以安裝</title>
+      <link>https://itpianist.github.io/post/post14/</link>
+      <pubDate>Sat, 20 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://itpianist.github.io/post/post14/</guid>
+      <description>關掉方法有兩種，一個是從firewall上上手，不過依照防火牆廠牌不同，Paloalto相較之下好設定許多
+直接將ms-store擋掉就可以了，另外一個就必須要去Active Directory下GPO，直接開啟範本
+將此服務關閉，否則一般使用者可以不透過administrator的權限去安裝軟體
+尤其安裝VPN　這個就會形成漏洞
+Active Directory　GPO設定
+windows10與之前的windows不太一樣的地方
+加入了市集功能(Microsoft Store)
+就以前的習慣，只要把user的權限設定在domain user的權限上
+基本上就能有效限制使用者安裝軟體的問題
+但10導入了Microsoft Store，使用者使用ios手機連接到電腦上
+居然可以強制連結，在防毒軟體的usb裝置限制與AD的限制
+可以透過IOS傳輸數據，只要從Store上安裝apple itunes
+就可以避開一切限制</description>
+    </item>
+    
+    <item>
       <title>911中毒事件part1</title>
       <link>https://itpianist.github.io/post/post1/</link>
       <pubDate>Tue, 11 Sep 2018 00:00:00 +0000</pubDate>

@@ -54,7 +54,7 @@
 <p>因為去年被駭的資安問題，所以工控電腦要重新安裝系統</p>
 <p>也因為資安問題，不能使用無授權或者是有資安疑慮的ghost</p>
 <p>所以利用國網中心開發的Clonezilla 再生龍來製作一鍵還原</p>
-<p><img src="/img/16-1.jpg" alt=""></p>
+<p><img src="/img/12-1.jpg" alt=""></p>
 <p>以我先前製作營業單位的POS機的還原隨身碟的範例來示範</p>
 <p>由於不知道工控主機是用MBR或UEFI的機器開機</p>
 <p>因為兩者修改的檔案是不一樣的</p>
@@ -104,7 +104,7 @@ MENU LABEL Supermarket POS 002
 <pre><code>ocs_live_extra_param=&quot;-g auto -e1 auto -scr -c -e2 -j2 -p
 </code></pre><p>這代碼就是在進階選項上的指令</p>
 <p>可以參考</p>
-<p><img src="/img/12-2.jpg" alt=""></p>
+<p><img src="/img/12-2.png" alt=""></p>
 <p>將-c取消掉的話，開機一旦選了之後就一路做到底了</p>
 <p>將-scr取消掉的話，直接不檢查該映像檔是否有損壞就直接還原了</p>
 <pre><code>poweroff restoredisk 2021-05-03-11_pos001-img sda
@@ -113,7 +113,7 @@ MENU LABEL Supermarket POS 002
 <p>restoredisk</p>
 <p>是還原印象檔到本機硬碟</p>
 <p>如果是還原分割區可以下restoredisk</p>
-<p><img src="/img/12-3.jpg" alt=""></p>
+<p><img src="/img/12-3.png" alt=""></p>
 <p>2021-05-03-11_pos001-img</p>
 <p>這個是映像檔的名稱</p>
 <p>sda是工控主機的硬碟</p>

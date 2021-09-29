@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Server on IT的不參不肆</title>
-    <link>https://itpianist.github.io/categories/server/</link>
-    <description>Recent content in Server on IT的不參不肆</description>
+    <title>fastcopy on IT的不參不肆</title>
+    <link>https://itpianist.github.io/tags/fastcopy/</link>
+    <description>Recent content in fastcopy on IT的不參不肆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <lastBuildDate>Fri, 11 Dec 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://itpianist.github.io/categories/server/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://itpianist.github.io/tags/fastcopy/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -34,56 +34,6 @@ ftpuser //ftp帳號ftppassword //ftp密碼binary //二進位制上傳或ASCII�
 這邊需要注意的事情就是，如果利用微軟FTP來做下載，會依當下啟動的時間來定義檔案時間戳記
 除非用FileZilla、NCFTP等第三方軟體，才有可能保留時間戳記，否則利用fastcopy的/from_date
 否則用時間去做判斷下載的作用不大</description>
-    </item>
-    
-    <item>
-      <title>新建置的Synology、HDD出現了損毀</title>
-      <link>https://itpianist.github.io/post/post8/</link>
-      <pubDate>Sat, 14 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://itpianist.github.io/post/post8/</guid>
-      <description>建置沒多久的Synology　RS2418RP+
-早上發出短蜂鳴聲，進去看之後發現了
-一顆HDD發出損壞警告，緊急拆下來之後，原本想要送修
-先拆另外一台RS2418RP+備機上的HDD來使用
-過沒多久還是跳出警告，只好開case
-過沒多久原廠給了回覆，回覆如下
-根據判斷，此原因為已知的問題，雖然您所使用的硬碟為相容清單的硬碟（ST8000NM000A-2KE101），但是其frimware 是SN01並不是清單列表上的SN02 [1]，目前已知使用在該款硬碟使用FW：SN01 的確會造成硬碟回應過導致系統將該硬碟踢出儲存集區(請參考下方log[2])。所以要解決此問題有兩種方式，第一個為停用硬碟的 write cache, 但是可能會造成寫入效能問題，第二種作法為請您聯絡硬碟廠商將FW更新到SN02來避免此問題。依照原廠的規定購買此相容清單上的硬碟，但frimware版本不符合，導致回應過度
-再來因為寫入速度問題，都會將write cache打開，如果不打開也許不會發生這次事件
-就只能更新frimware版本了</description>
-    </item>
-    
-    <item>
-      <title>電子發票上傳失敗 Part1</title>
-      <link>https://itpianist.github.io/post/post4/</link>
-      <pubDate>Mon, 12 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://itpianist.github.io/post/post4/</guid>
-      <description>由於每天凌晨兩點會排程Pos server 上的電子發票拋轉到Tunkey server上，由Tunkey 將已開立、作廢等發票上傳到財政部einvoice上，往常拋轉都沒有大問題，這幾天一直失敗，問合作廠商也是多開幾個排程讓電子發票在拋，少則缺幾百張，多者直接少一半，用人力去轉也不是辦法，於是利用robocopy這個指令來接替合作廠商的程式。
-首先先掛載Pos server 上存的電子發票資料檔
-net use Z:\\\192.168.1.1\pos\EINVOICE_XML\2018 /user:帳號　密碼
-當然也可以選擇不寫這段，直接掛載起來也可以，只是Tunkey重開機的時候要記得掛起來
-否則底下程式碼全部都會沒作用
-robocopy Z:\EINVOICE_XML\2018\ C:\einvt_xml *.xml /xo /s /lev:3 /maxage:1
-這行指令會把pos主機的最新產出的資料夾複製到Tunkey主機上的C:\einvt_xml上
-這指令注意的一點就是EINVOICE_XML\2018資料夾只有當天的發票資料
-如果有其他天的發票資料，那麼就會全部複製過去，如果有存放其他天資料，robocopy就要加時間函數
-for /r C:\einvt_xml\ %%f in (*.xml) do move &amp;quot;%%f&amp;quot; C:\test
-會加這行因為複製過來的檔案，會依循pos機上的發票的分類資料夾去複製
-如果沒做這段，robocopy會跟著資料夾一起複製，會導致einvoice軟體上傳失敗
-功能就是把所有C0401、C0501、C0601、D00301、D0401、D0501、C0701裡頭的發票檔
-全部整丟到C:\test上，方便後續用robocopy做分類move
-robocopy C:\test\ C:\EINVTurnkey\DATA\UpCast\B2CSTORAGE\C0401\SRC C0401*.XML/xo /maxage:1 /LOG+:C:\test\backup.txt
-test資料夾裏頭的*.xml發票檔，依照已開立，已作廢等丟到EINVTurnkey的C0401的UpCast上
-/LOG+:C:\test\backup.txt　這段是做完之後將log留下來，以便後續找bug
-上段只要把C0401的數字改成其他財政部規定的值就可以了
-robocopy C:\test\ C:\EINVTurnkey\DATA\UpCast\B2CSTORAGE\C0501\SRC C0501*.XML/xo /maxage:1 /LOG+:C:\test\backup.txt
-最後把test資料夾裡的.xml刪除就可以
-del /S C:\test\*.xml 
-不用這個指令也可以，robocopy指令加一行/MOVE就可以了
-使用幾天都沒有異常，但一旦發票數量達上千張的時候，robocopy指令就出現bug了
- 已啟動 :
-來源 : C:\test\ 目的地 : C:\EINVTurnkey\DATA\UpCast\B2CSTORAGE\C0701\SRC\</description>
     </item>
     
     <item>
